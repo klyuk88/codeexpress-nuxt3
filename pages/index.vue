@@ -1,14 +1,17 @@
 <template>
-<div id="main">
-    <nuxt-link to="/about">About</nuxt-link>
-<h1>Test</h1>
-</div>
- 
+<SectionMain/>
+<SectionAbout/>
+<SectionServices/>
+<SectionBenifits/>
+<SectionTechnologies/>
+<SectionDesign/>
+
 </template>
 
+<script setup>
+</script>
+
 <style>
-#main {
-    height: 200vh;
-    background: grey;
-}
+
+
 </style>

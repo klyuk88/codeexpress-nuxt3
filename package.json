@@ -9,6 +9,9 @@
   "devDependencies": {
     "nuxt": "3.0.0-rc.1",
     "sass": "^1.51.0",
-    "sass-loader": "^10.2.1"
+    "sass-loader": "^13.0.0"
+  },
+  "dependencies": {
+    "vue-image-compare2": "^1.0.0"
   }
 }
