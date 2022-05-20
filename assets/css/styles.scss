@@ -37,6 +37,7 @@
 :root {
     --gutter: 20px;
     --accent: #ED7635;
+    --black: #161616;
     --section-top: 10rem;
     --section-bottom: 8rem;
 }
@@ -80,6 +81,7 @@ h6 {
     font-family: "Artegra";
     line-height: 100%;
     font-weight: 700;
+    color: var(--black);
 }
 
 .container {

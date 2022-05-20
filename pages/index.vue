@@ -5,6 +5,7 @@
 <SectionBenifits/>
 <SectionTechnologies/>
 <SectionDesign/>
+<SectionPortfolio/>
 
 </template>
 

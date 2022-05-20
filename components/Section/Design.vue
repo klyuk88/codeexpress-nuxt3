@@ -1,5 +1,5 @@
 <template>
-  <section id="design">
+  <section id="design" class="lower-indent">
     <div class="container">
       <div class="decor-line"></div>
       <div class="row">
