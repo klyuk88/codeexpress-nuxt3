@@ -11,7 +11,7 @@
 const props = defineProps(["name"]);
 </script>
 
-<style>
+<style lang="scss">
 .btn {
   display: flex;
   align-items: center;
@@ -25,6 +25,9 @@ const props = defineProps(["name"]);
   border-radius: 50px;
   padding: 1rem 2rem;
   cursor: pointer;
+  span {
+    color: #fff;
+  }
 }
 
 .btn img {

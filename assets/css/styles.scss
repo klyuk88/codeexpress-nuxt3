@@ -98,6 +98,9 @@ h6 {
 .row.center {
     align-items: center;
 }
+.row.end {
+    align-items: flex-end;
+}
 .row>.col {
     flex-grow: 1;
 }
@@ -147,6 +150,10 @@ h6 {
     flex-wrap: wrap;
 }
 
+.flex.column {
+    flex-direction: column;
+}
+
 .flex.center {
     align-items: center;
 }
@@ -159,17 +166,26 @@ h6 {
     align-items: flex-end;
 }
 
+.flex.j-between {
+    justify-content: space-between;
+}
+.flex.j-center {
+    justify-content: center;
+}
+
 .link {
     font-size: 1rem;
     color: var(--accent);
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 700;
+    font-family: 'Raleway';
 }
 .decor-line {
     width: 100%;
     height: 1px;
     background: #000;
+    opacity: 0.5;
 }
 
 .section-title {

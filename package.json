@@ -12,6 +12,7 @@
     "sass-loader": "^13.0.0"
   },
   "dependencies": {
+    "swiper": "^8.1.5",
     "vue-image-compare2": "^1.0.0"
   }
 }

@@ -173,6 +173,7 @@ export default {
   font-family: 'Raleway';
   font-weight: 700;
   text-transform: none;
+  color: #fff;
 }
 
 .services .list > .item .header .open-icon {

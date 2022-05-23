@@ -6,7 +6,8 @@
 <SectionTechnologies/>
 <SectionDesign/>
 <SectionPortfolio/>
-
+<SectionReviews/>
+<SectionCTA/>
 </template>
 
 <script setup>
