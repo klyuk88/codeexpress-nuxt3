@@ -1,14 +1,17 @@
 <template>
-    <div>
-        <TheHeader/>
-        <NuxtPage/>
-        <TheFooter/>
-    </div>
+  <div>
+    <TheHeader />
+    <NuxtPage />
+    <TheFooter />
+    <Navigation />
+  </div>
 </template>
 
 <script setup>
- const nuxtApp = useNuxtApp()
-  nuxtApp.hook("page:finish", () => {
-     window.scrollTo(0, 0)
-  })
+const nuxtApp = useNuxtApp();
+nuxtApp.hook("page:finish", () => {
+  window.scrollTo(0, 0);
+});
+
+
 </script>

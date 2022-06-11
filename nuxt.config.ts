@@ -5,4 +5,10 @@ export default defineNuxtConfig({
  css: [
      '@/assets/css/styles.scss',
  ],
+ build: {
+    transpile: ['gsap'],
+},
+buildModules: [
+    '@pinia/nuxt',
+  ],
 })

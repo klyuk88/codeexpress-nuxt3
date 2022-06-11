@@ -1,20 +1,12 @@
 <template>
   <client-only>
-    <image-compare :before="before" :after="after">
-      <!-- <template v-slot:icon-left>
-          <img src="@/assets/images/handle-left.svg" alt="" class="handle-left">
-      </template>
-      <template v-slot:icon-right>
-        <img src="@/assets/images/handle-right.svg" alt="" class="handle-right">
-      </template> -->
-    </image-compare>
+    <ImageCompare :before="before" :after="after"></ImageCompare>
   </client-only>
 </template>
 
 <script setup>
+import ImageCompare from '@/components/Main/ImageCompare.vue'
 import { ref } from "vue";
-import imageCompare from "vue-image-compare2";
-
 const before = ref("demo-screen.webp");
 const after = ref("proto-demoX4.webp");
 </script>
@@ -73,9 +65,5 @@ const after = ref("proto-demoX4.webp");
   }
 }
 
-
-// .handle-left, .handle-right {
-//     width: 1rem;
-// }
 
 </style>

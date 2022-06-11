@@ -8,7 +8,7 @@
           </h2>
         </div>
         <div class="col-3">
-          <Swiper :slides-per-view="1" :space-between="50" @swiper="onSwiper">
+          <Swiper :slides-per-view="1" :space-between="50">
             <SwiperSlide>
               <ReviewItem/>
             </SwiperSlide>

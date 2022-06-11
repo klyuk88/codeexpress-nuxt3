@@ -1,7 +1,7 @@
 <template>
   <section class="about">
     <div class="container">
-      <div class="decor-line"></div>
+      <div class="decor-line" style="margin-bottom: var(--section-bottom)"></div>
       <div class="row">
         <div class="col-3">
           <h2 class="section-title">Работаем <br/>на <span>результат</span></h2>
@@ -20,6 +20,7 @@
           </nuxt-link>
         </div>
       </div>
+      <div class="decor-line" style="margin-top: var(--section-bottom)"></div>
     </div>
   </section>
 </template>
@@ -31,10 +32,6 @@ export default {
 <style>
 .about {
   padding-top: var(--section-top);
-  padding-bottom: var(--section-bottom);
-}
-.about .decor-line {
-  margin-bottom: var(--section-bottom);
 }
 .about .btn {
   margin-top: 1.5em;

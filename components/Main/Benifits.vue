@@ -1,5 +1,5 @@
 <template>
-  <section class="benifits upper-indent lower-indent">
+  <section class="benifits lower-indent">
     <div class="container">
         <div class="decor-line"></div>
       <h2 class="section-title">

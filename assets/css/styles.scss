@@ -3,6 +3,7 @@
     src: url('../fonts/ArtegraSansExBold.ttf');
     font-weight: 700;
 }
+
 @font-face {
     font-family: 'Artegra';
     src: url('../fonts/ArtegraSansExSemiBold.ttf');
@@ -38,6 +39,7 @@
     --gutter: 20px;
     --accent: #ED7635;
     --black: #161616;
+    --light: #EEEEEE;
     --section-top: 10rem;
     --section-bottom: 8rem;
 }
@@ -61,7 +63,7 @@ html {
 
 p {
     line-height: 150%;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "Raleway";
     font-weight: 400;
     text-transform: none;
@@ -69,7 +71,7 @@ p {
 
 body {
     font-family: "Raleway";
-    background: #EEEEEE;
+    background: var(--light);
 }
 
 h1,
@@ -95,12 +97,15 @@ h6 {
     width: 100%;
     gap: var(--gutter);
 }
+
 .row.center {
     align-items: center;
 }
+
 .row.end {
     align-items: flex-end;
 }
+
 .row>.col {
     flex-grow: 1;
 }
@@ -141,7 +146,7 @@ h6 {
     flex-basis: auto;
 }
 
-.row > .offset-1 {
+.row>.offset-1 {
     margin-left: calc(100%/6*1);
 }
 
@@ -169,6 +174,7 @@ h6 {
 .flex.j-between {
     justify-content: space-between;
 }
+
 .flex.j-center {
     justify-content: center;
 }
@@ -181,6 +187,7 @@ h6 {
     font-weight: 700;
     font-family: 'Raleway';
 }
+
 .decor-line {
     width: 100%;
     height: 1px;
@@ -192,6 +199,7 @@ h6 {
     font-size: 4rem;
     text-transform: uppercase;
 }
+
 .section-title span {
     color: var(--accent);
     line-height: 110%;
@@ -201,7 +209,8 @@ h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     text-transform: uppercase;
     background: var(--accent);
     color: #fff;
@@ -222,6 +231,7 @@ h6 {
     font-size: 0.8rem;
     padding: 0.9rem 1.2rem;
 }
+
 .btn.min-btn img {
     width: 0.95rem;
     margin-left: 0.6rem;
@@ -233,6 +243,14 @@ h6 {
 
 .lower-indent {
     padding-bottom: var(--section-bottom);
+}
+
+.page-title {
+    font-size: 5rem;
+    text-transform: uppercase;
+    span {
+        color: var(--accent);
+    }
 }
 
 /* lg */

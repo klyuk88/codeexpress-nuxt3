@@ -1,8 +1,12 @@
 <template>
-  <div class="portfolio-item flex center column j-center">
-    <h2 class="pi-title">Личный кабинет охранного предприятия</h2>
-    <span class="pi-data">Март 2022</span>
-    <nuxt-link to="#" class="pi-btn flex center j-center">
+  <div class="portfolio-item flex center column j-center" :class="{'light': light}">
+    <h2 class="title">Личный кабинет охранного предприятия</h2>
+    <div class="meta">
+      <span class="data">Март 2022</span>
+      <span class="data">Сайт под ключ</span>
+
+      </div> 
+    <nuxt-link to="#" class="item-btn flex center j-center">
       <svg
         width="27px"
         height="12.3428955px"
@@ -10,7 +14,7 @@
         version="1.1"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         xmlns="http://www.w3.org/2000/svg"
-        class="pi-btn-arrow"
+        class="btn-arrow"
       >
         <defs>
           <path d="M0 0L27 0L27 12.3429L0 12.3429L0 0Z" id="path_1" />
@@ -42,13 +46,14 @@
 </template>
 
 <script setup>
+const props = defineProps(['light'])
 </script>
 
 <style lang="scss">
 .portfolio-item {
   padding: 5rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  .pi-title {
+  .title {
     font-size: 2.5rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
@@ -56,18 +61,31 @@
     text-align: center;
     line-height: 1.3;
   }
-  .pi-data {
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .data {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
     margin-top: 1rem;
   }
-  .pi-btn {
+  .data:after {
+    content: '●';
+    margin: 0 10px
+  }
+  .data:last-child:after {
+    content: '';
+    margin: 0
+  }
+  .item-btn {
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.8);
     margin-top: 1rem;
-    .pi-btn-arrow {
+    .btn-arrow {
       width: 1.5rem;
       height: auto;
       #Shape {
@@ -75,5 +93,17 @@
     }
   }
     }
+}
+.portfolio-item.light {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  .title  {
+    color: rgba(0, 0, 0, 0.498039);
+  }
+  .data {
+    color: rgba(0, 0, 0, 0.498039);
+  }
+  .item-btn {
+    background: #D3D3D3;
+  }
 }
 </style>

@@ -12,7 +12,11 @@
     "sass-loader": "^13.0.0"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.1.9",
+    "gsap": "^3.10.4",
+    "pinia": "^2.0.14",
     "swiper": "^8.1.5",
-    "vue-image-compare2": "^1.0.0"
+    "vue-intersection-observer": "^0.1.9",
+    "vue-marquee-text-component": "^2.0.1"
   }
 }
