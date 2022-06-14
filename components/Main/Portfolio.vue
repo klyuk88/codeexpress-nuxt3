@@ -34,7 +34,7 @@ onMounted(() => {
   const options = {
     root: null,
     rootMargin: "0px",
-    threshold: 0.3,
+    threshold: 0.2,
   };
   const callBack = (entries, observer) => {
     entries.forEach((entry) => {

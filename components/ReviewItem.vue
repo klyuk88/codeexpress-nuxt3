@@ -43,4 +43,13 @@
     display: inline-block;
   }
 }
+.main-page.dark .review-item {
+  .ri-header {
+    border-color: rgba(255, 255, 255, 0.5)
+  }
+  .ri-text {
+    color: #fff;
+    opacity: 0.5;
+  }
+}
 </style>

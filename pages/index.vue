@@ -47,7 +47,7 @@ const store = useStore()
     background: #fff;
   }
   .portfolio-item .title {
-    opacity: 0.5;
+    color: rgba($color: #fff, $alpha: 0.5);
   }
 }
 </style>
