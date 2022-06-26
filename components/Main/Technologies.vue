@@ -110,7 +110,8 @@ onMounted(() => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         isItemActive.value = true;
-        observer.unobserve(tech.value);
+      } else {
+        isItemActive.value = false;
       }
     });
   }

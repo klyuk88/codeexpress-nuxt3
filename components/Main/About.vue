@@ -13,10 +13,7 @@
             интернет-магазинов, личных кабинетов.
           </p>
           <nuxt-link to="/">
-            <button class="btn">
-              <span>Заполнить бриф</span>
-              <img src="@/assets/images/btn-arrow.svg" alt="" />
-            </button>
+            <FormBtn :name="'Заполнить бриф'"/>
           </nuxt-link>
         </div>
       </div>

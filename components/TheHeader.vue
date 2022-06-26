@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ dark: store.darkMode }">
     <div class="container">
       <div class="row center">
         <div class="col-1">
@@ -97,18 +97,20 @@
                 </g>
               </g>
             </svg>
-            <p class="menu-title">Меню</p>
+            <EffectWord :title="'Меню'" />
+            <!-- <p class="menu-title">Меню</p> -->
           </div>
         </div>
         <div class="col-1">
           <NuxtLink to="/">
-           <img src="@/assets/images/logo-black.svg" alt="" class="logo" />
+            <img src="@/assets/images/logo-black.svg" alt="" class="logo" />
           </NuxtLink>
-         
         </div>
         <div class="col">
-          <div class="link-wrap">
-            <NuxtLink to="/brif" class="link"> Заполнить бриф </NuxtLink>
+          <div class="col-wrap">
+            <nuxt-link to="/brif">
+              <EffectWord :title="'Заполнить бриф'" />
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -117,26 +119,41 @@
   </header>
 </template>
 <script setup>
-import {useStore} from '@/stores/store.js'
-const store = useStore()
+import { useStore } from "@/stores/store.js";
+const store = useStore();
 const showNavigation = () => {
-  store.showNav = true
-}
-
+  store.showNav = true;
+};
 </script>
 <style lang="scss">
 .header {
-  padding: 20px 0;
+  padding-top: 1.2rem;
+  position: sticky;
+  position: -webkit-sticky;
+  will-change: transform;
+  background: var(--light);
+  top: 0;
+  z-index: 100;
+  transition: background 0.3s ease, color 0.3s ease;
+  .menu {
+    display: inline-flex;
+    .link {
+      font-weight: 600;
+      color: #000;
+    }
+  }
   .menu:hover {
     cursor: pointer;
     .menu-title {
       color: var(--accent);
     }
+    .link {
+      color: var(--accent);
+    }
     .menu-icon {
-      transform: scale(1.2);
       #Group {
         path {
-          fill: var(--accent)
+          fill: var(--accent);
         }
       }
     }
@@ -146,18 +163,18 @@ const showNavigation = () => {
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: 600;
-  transition: color .1s ease;
+  transition: color 0.1s ease;
 }
 
 .header {
   .menu-icon {
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
     margin-right: 10px;
     #Group {
-        path {
-          transition: fill .1s ease;
-        }
+      path {
+        transition: fill 0.1s ease;
       }
+    }
   }
 }
 
@@ -175,5 +192,40 @@ const showNavigation = () => {
 
 .header .decor-line {
   margin-top: 20px;
+  width: 0%;
+  animation: widthProgress 1s ease 0.3s 1 normal both;
+}
+
+@keyframes widthProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.col-wrap {
+  text-align: right;
+}
+
+.header.dark {
+  background: var(--black);
+  .decor-line {
+    background: #fff;
+  }
+  .menu-title {
+    color: #fff;
+  }
+  .link {
+    color: #fff;
+  }
+  .menu-icon {
+    #Group {
+      path {
+        fill: #fff;
+      }
+    }
+  }
 }
 </style>

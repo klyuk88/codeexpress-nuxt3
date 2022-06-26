@@ -4,7 +4,8 @@ export const useStore = defineStore('mainStore', {
   state: () => {
     return {
       showNav: false,
-      darkMode: false
+      darkMode: false,
+      lightBox: false
     }
   },
 })

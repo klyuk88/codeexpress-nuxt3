@@ -4692,6 +4692,11 @@
   "resolved" "https://registry.npmjs.org/vue-demi/-/vue-demi-0.13.1.tgz"
   "version" "0.13.1"
 
+"vue-easy-lightbox@^1.4.1":
+  "integrity" "sha512-bZHepAokLwiy77qLx45n3WxnLRg4M2gcffpu2Q/H71C7UgSxxXgAmbJdIrtOFni0VwA1rFxkfBBP1Ajn9FY2OA=="
+  "resolved" "https://registry.npmjs.org/vue-easy-lightbox/-/vue-easy-lightbox-1.4.1.tgz"
+  "version" "1.4.1"
+
 "vue-intersection-observer@^0.1.9":
   "integrity" "sha512-dLhCehBCC1mtpfslFXT1OEqVi7zK52lZvZBJyq5RgdXURq39A03+Zb8IrX+Yg1sbKhKZLTwzHbA0OTYlIHDIMg=="
   "resolved" "https://registry.npmjs.org/vue-intersection-observer/-/vue-intersection-observer-0.1.9.tgz"
@@ -4726,7 +4731,7 @@
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
   "version" "2.6.14"
 
-"vue@^2.6.14 || ^3.2.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.19", "vue@^3.2.25", "vue@^3.2.33", "vue@>=3", "vue@3.2.33", "vue@3.2.36":
+"vue@^2.6.14 || ^3.2.0", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.19", "vue@^3.2.25", "vue@^3.2.33", "vue@>=3", "vue@3.2.33", "vue@3.2.36":
   "integrity" "sha512-5yTXmrE6gW8IQgttzHW5bfBiFA6mx35ZXHjGLDmKYzW6MMmYvCwuKybANRepwkMYeXw2v1buGg3/lPICY5YlZw=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.36.tgz"
   "version" "3.2.36"

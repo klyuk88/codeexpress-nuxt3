@@ -1,18 +1,17 @@
 <template>
   <div class="blog-item">
-    <a href="http://" class="image-link">
+    <nuxt-link to="/blog/atricle" class="image-link">
       <div class="image-block">
         <img
-          src="https://images.unsplash.com/photo-1583321500900-82807e458f3c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80"
+          src="@/assets/images/blog-article.jpeg"
           alt=""
         />
       </div>
-    </a>
+    </nuxt-link>
 
     <div class="title-block">
-      <a href="http://" class="title-link"
-        ><h3 class="title">Разработка в 2022 году</h3></a
-      >
+      <nuxt-link to="/blog/atricle" class="title-link"
+        ><h3 class="title">Разработка в 2022 году</h3></nuxt-link>
       <span class="meta">10 минут</span>
     </div>
   </div>

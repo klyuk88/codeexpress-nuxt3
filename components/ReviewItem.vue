@@ -1,4 +1,5 @@
 <template>
+
   <div class="review-item">
     <div class="ri-header flex start">
       <img src="@/assets/images/reviews/mai_logo.png" alt="" class="ri-logo"/>
@@ -7,11 +8,18 @@
     <div class="ri-text">
       Далеко-далеко за словесными горами в стране гласных и согласных живут, рыбные тексты. Гор жизни, обеспечивает, диких переписывается грамматики сих там себя он выйти однажды последний меня имеет океана правилами ручеек журчит инициал заглавных страна одна которое свой своих от всех оксмокс заманивший. Рыбного!
     </div>
-    <a href="#" target="_blank" rel="noopener noreferrer" class="link">Смотреть скан</a>
+     <EffectWord :title="'Смотреть скан'" @click.prevent="openLightbox"/>
   </div>
 </template>
 
 <script setup>
+import {useStore} from '@/stores/store.js'
+const store = useStore()
+const emit = defineEmits(['blockSwiper'])
+const openLightbox = () => {
+    store.lightBox = true
+    emit('blockSwiper')
+}
 </script>
 
 <style lang="scss">
@@ -37,10 +45,7 @@
     margin-top: 2rem;
     font-size: 1rem;
     line-height: 1.5;
-  }
-  .link {
-    margin-top: 1.5rem;
-    display: inline-block;
+    margin-bottom: 1.5rem;
   }
 }
 .main-page.dark .review-item {

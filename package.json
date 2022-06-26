@@ -16,6 +16,7 @@
     "gsap": "^3.10.4",
     "pinia": "^2.0.14",
     "swiper": "^8.1.5",
+    "vue-easy-lightbox": "^1.4.1",
     "vue-intersection-observer": "^0.1.9",
     "vue-marquee-text-component": "^2.0.1"
   }

@@ -1,24 +1,15 @@
 <template>
-  <figure :class="{ full }" class="image-compare" @mousemove.prevent="onMouseMove" @click.prevent="onMouseMove($event, true)">
-    <!-- d&d overlay -->
-    <div :class="{ visible: showDropzone }" class="drop-zone">Drop 1 or 2 images here !</div>
-
-    <div v-show="!hideAfter && showAfter" :style="{ width: posX + 'px' }" class="wrapper" @mousedown.prevent="onMouseDownImage">
+  <figure class="image-compare" @mousemove.prevent="onMouseMove" @click.prevent="onMouseMove($event, true)">
+    <div :style="{ width: posX + 'px' }" class="wrapper" @mousedown.prevent="onMouseDownImage">
       <!-- a-img -->
-      <img :src="mutableAfter" :style="dimensions" alt="after">
-
-      <!-- a-label -->
-      <div v-show="afterLabel" class="after-name">
-        {{ afterLabel }}
-        <div v-show="afterSize" class="size">{{ afterSize }}</div>
-      </div>
+      <img :src="after" :style="dimensions" alt="after">
     </div>
 
     <!-- b-img -->
-    <img :src="mutableBefore" :style="dimensions" alt="before" @mousedown.prevent="onMouseDownImage">
+    <img :src="before" :style="dimensions" alt="before" @mousedown.prevent="onMouseDownImage">
 
     <!-- handle -->
-    <div v-if="!hideHandle" v-show="!hideAfter" :style="{ left: posX + 'px' }" class="handle" @mousedown.prevent="onMouseDownHandle">
+    <div :style="{ left: posX + 'px' }" class="handle" @mousedown.prevent="onMouseDownHandle">
       <div id="handle">
         <div class="decor-round"></div>
         <span class="handle-icon left">
@@ -30,11 +21,7 @@
       </div>
     </div>
 
-    <!-- b-label -->
-    <div v-show="beforeLabel" class="before-name">
-      {{ beforeLabel }}
-      <div v-show="beforeSize" class="size">{{ beforeSize }}</div>
-    </div>
+
   </figure>
 </template>
 
@@ -44,11 +31,11 @@ export default {
   props: {
     before: {
       type: String,
-      default: 'https://image-compare.netlify.com/assets/before.jpg',
+      default: 'https://www.sunhome.ru/i/wallpapers/163/alberta-banf-kanada.1920x1200.jpg',
     },
     after: {
       type: String,
-      default: 'https://image-compare.netlify.com/assets/after.jpg',
+      default: 'https://www.itl.cat/pngfile/big/186-1861341_widescreen-road-scenery-hd.jpg',
     },
     full: {
       type: Boolean,
@@ -316,33 +303,6 @@ export default {
       // reset after visibility
       setTimeout(() => (this.showAfter = true), i * 100)
     },
-    // onRightClick (event) {
-    //   // console.log('switching images')
-    //   event.preventDefault()
-    //   this.switchImages()
-    // },
-
-    // helper
-    debounce (func, wait, immediate) {
-      let timeout
-
-      return function () {
-        const context = this
-        const args = arguments
-        const later = function () {
-          timeout = null
-          if (!immediate) func.apply(context, args)
-        }
-
-        const callNow = immediate && !timeout
-        clearTimeout(timeout)
-        timeout = setTimeout(later, wait)
-        if (callNow) func.apply(context, args)
-      }
-    },
-    switchImages () {
-      this.showAfter = !this.showAfter
-    },
 
     // drag & drop
     onDragEnter () {
@@ -366,57 +326,7 @@ export default {
         // this.showDropzone = true
       }
     },
-    onDrop (event) {
-      if (this.isSwitchable) {
-        // console.log('onDrop', event)
-        event.preventDefault()
-        this.showDropzone = false
-        // console.log('drop', event)
-        const files = event.dataTransfer.files
 
-        if (files.length === 1) {
-          console.log('drop file :', files[0])
-          const x = event.x
-          const half = Math.round(window.outerWidth / 2)
-          const leftSide = x <= half
-          console.log('x ?', x)
-          console.log('half ?', half)
-          console.log('was on left side ?', leftSide)
-          this.loadFile(files[0], leftSide)
-        } else {
-          console.log('drop files :', files)
-          this.loadFile(files[0], true)
-          this.loadFile(files[1], false)
-        }
-        // reset zoom
-        this.mutableZoom = 1
-        // reset after visibility
-        this.showAfter = true
-        this.onResize()
-      }
-    },
-    getFileName (file) {
-      return file.name
-    },
-    getFileSize (file) {
-      return '(' + Math.round(file.size / 1024) + ' Ko)'
-    },
-    loadFile (file, leftSide) {
-      var reader = new FileReader()
-
-      reader.onload = (event) => {
-        if (leftSide) {
-          this.afterName = this.getFileName(file)
-          this.afterSize = this.getFileSize(file)
-          this.mutableAfter = event.target.result
-        } else {
-          this.beforeName = this.getFileName(file)
-          this.beforeSize = this.getFileSize(file)
-          this.mutableBefore = event.target.result
-        }
-      }
-      reader.readAsDataURL(file)
-    },
   },
 }
 </script>
@@ -426,6 +336,7 @@ export default {
   position: relative;
   overflow: hidden;
   margin: 0;
+  width: 100%;
 }
 
 .after-name,

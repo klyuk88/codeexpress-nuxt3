@@ -1,8 +1,13 @@
 <template>
   <div class="navigation-wrap" :class="{ active: store.showNav }">
+    <div class="linesBackground">
+      <div class="bg-line"></div>
+      <div class="bg-line"></div>
+      <div class="bg-line"></div>
+    </div>
     <div class="nav-header-block">
       <img src="@/assets/images/logo-white.svg" alt="logo" class="nav-logo" />
-      <span class="close-nav" @click="closeNav"> Закрыть </span>
+      <EffectWord :title="'Закрыть'" class="close-nav" @click="closeNav" />
       <div class="line"></div>
     </div>
 
@@ -15,9 +20,9 @@
           <li>
             <nuxt-link to="/projects">Проекты</nuxt-link>
           </li>
-          <li>
+          <!-- <li>
             <nuxt-link to="/services">Услуги</nuxt-link>
-          </li>
+          </li> -->
           <li>
             <nuxt-link to="/blog">Статьи</nuxt-link>
           </li>
@@ -26,13 +31,15 @@
       <div>
         <div class="nav-image">
           <img
-            src="https://assets-global.website-files.com/61c48ad0e69d706fcbc36049/61e69b889d04172d57dd4148_Rectangle%20325.png"
+            src="@/assets/images/abstract_2.jpg"
             alt=""
           />
         </div>
         <div class="nav-contacts-block">
           <a href="tel:+79859227045" class="link">+7 985 922 70 45</a>
-          <a href="mailto:hello@launchplus.ru" class="link">hello@launchplus.ru</a>
+          <a href="mailto:hello@launchplus.ru" class="link"
+            >hello@launchplus.ru</a
+          >
           <a
             href="http://t.me/klyukovskiy"
             target="_blank"
@@ -76,35 +83,65 @@
 <script setup>
 import { useStore } from "@/stores/store.js";
 
+
 const store = useStore();
 const closeNav = () => {
-  store.showNav = false
-}
+  store.showNav = false;
+};
 </script>
 <style lang="scss">
 .navigation-wrap {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: var(--black);
   left: 0;
   top: 0;
   z-index: 1000;
-  display: none;
   padding: 0 2rem;
+  transform: translateX(-200%);
+  .linesBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    .bg-line {
+      width: 0;
+      background: var(--black);
+    }
+    .bg-line:first-child {
+      transition: width 1s ease;
+    }
+    .bg-line:nth-child(2) {
+      width: 0;
+      transition: width 0.5s ease;
+    }
+    .bg-line:last-child {
+      width: 0;
+      transition: width 0.3s ease;
+    }
+  }
   .nav-header-block {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 2rem 0;
+    z-index: 1;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.3s ease 1s;
     .line {
-      width: 100%;
+      width: 0;
       height: 1px;
       background: #fff;
       bottom: 0;
       left: 0;
       position: absolute;
+      transition: width .3s ease 1.2s;
     }
     .nav-logo {
       width: 8rem;
@@ -114,8 +151,11 @@ const closeNav = () => {
       color: #fff;
       text-transform: uppercase;
       font-weight: 600;
-      transition: color .3s ease;
+      transition: color 0.3s ease;
       cursor: pointer;
+      .link {
+        color: #fff;
+      }
     }
     .close-nav:hover {
       color: var(--accent);
@@ -126,6 +166,10 @@ const closeNav = () => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    z-index: 1;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.3s ease 1s;
     .nav {
       padding: 0;
       list-style: none;
@@ -136,7 +180,7 @@ const closeNav = () => {
           font-weight: 600;
           font-family: "Artegra";
           text-transform: uppercase;
-          transition: color .1s ease;
+          transition: color 0.1s ease;
         }
         a:hover {
           color: var(--accent);
@@ -177,10 +221,25 @@ const closeNav = () => {
   }
 }
 .navigation-wrap.active {
-  display: block;
+  transform: translateX(0);
+  .linesBackground {
+    .bg-line {
+      width: 100%;
+    }
+  }
+
+  .nav-header-block {
+    opacity: 1;
+    .line {
+      width: 100%;
+    }
+  }
+  .nav-menu-block {
+    opacity: 1;
+  }
 }
 
-.router-link-active {
-  color: var(--accent)!important;
-}
+// .router-link-active {
+//   color: var(--accent) !important;
+// }
 </style>

@@ -1,10 +1,10 @@
 <template>
-  <nuxt-link to="/">
-    <button class="btn">
-      <span>{{ name }}</span>
-      <img src="@/assets/images/btn-arrow.svg" alt="" />
-    </button>
-  </nuxt-link>
+  <button class="btn">
+    <div class="title-wrap">
+      <span class="title" :data-name="name">{{ name }}</span>
+    </div>
+    <img class="icon" src="@/assets/images/btn-arrow.svg" alt="" />
+  </button>
 </template>
 
 <script setup>
@@ -22,15 +22,33 @@ const props = defineProps(["name"]);
   color: #fff;
   font-weight: 500;
   border: none;
-  border-radius: 50px;
+  border-radius: 2rem;
   padding: 1rem 2rem;
   cursor: pointer;
-  span {
+  .title-wrap {
+    overflow: hidden;
+  }
+  .title {
     color: #fff;
+    position: relative;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+  .title:after {
+    content: attr(data-name);
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
 }
 
-.btn img {
+.btn:hover {
+  .title {
+    transform: translateY(-100%);
+  }
+}
+
+.btn .icon {
   width: 1.5rem;
   margin-left: 1rem;
 }

@@ -79,6 +79,7 @@
 .footer {
   background: var(--black);
   padding: 4rem 0;
+  overflow: hidden;
   .foo-contacts {
     gap: 1rem;
   }

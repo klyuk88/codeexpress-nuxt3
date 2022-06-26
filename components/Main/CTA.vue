@@ -13,7 +13,8 @@
         </div>
         <div class="col-3">
           <div class="cta-brif-demo-wrap">
-            <img src="@/assets/images/cta-demo.jpg" alt="" class="brif-demo-content">
+            <video src="@/assets/video/brif.mp4" autoplay loop muted playsinline preload="metatada" class="brif-demo-content"></video>
+            <!-- <img src="@/assets/images/cta-demo.jpg" alt="" class="brif-demo-content"> -->
           </div>
         </div>
       </div>

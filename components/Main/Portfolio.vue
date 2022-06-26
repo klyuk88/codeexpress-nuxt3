@@ -1,7 +1,7 @@
 <template>
   <section
     id="portfolio"
-    class="upper-indent lower-indent"
+    class="upper-indent"
     :class="{ 'before-dark-mode': !store.darkMode }"
     ref="portfolioElem"
   >
@@ -11,7 +11,10 @@
           Работаем с <span>разными</span><br />
           сферами бизнеса
         </h2>
-        <nuxt-link to="/portfolio" class="link"> Все проекты </nuxt-link>
+        <nuxt-link to="/projects">
+        <EffectWord :title="'Все проекты'"/>
+        </nuxt-link>
+         
       </div>
       <div class="decor-line"></div>
 
@@ -34,7 +37,7 @@ onMounted(() => {
   const options = {
     root: null,
     rootMargin: "0px",
-    threshold: 0.2,
+    threshold: 0.3,
   };
   const callBack = (entries, observer) => {
     entries.forEach((entry) => {
@@ -53,16 +56,9 @@ onMounted(() => {
 <style lang="scss">
 #portfolio {
   transition: opacity 0.4s ease;
-  // background: var(--black);
-  .section-title {
-    color: #fff;
-  }
   .decor-line {
-    background: #fff;
     margin-top: 3rem;
   }
 }
-#portfolio.before-dark-mode {
-  opacity: 0;
-}
+
 </style>

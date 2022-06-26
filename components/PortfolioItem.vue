@@ -1,11 +1,11 @@
 <template>
   <div
     class="portfolio-item flex center column j-center"
-    :class="{ light: light }"
+    :class="{ light: !store.darkMode }"
     ref="item"
     
   >
-  <nuxt-link to="#" class="item-link" @mousemove="moveThumb" @mouseleave="resetCoordinate" @mouseenter="resetScale"></nuxt-link>
+  <nuxt-link to="/projects/best_work" class="item-link" @mousemove="moveThumb" @mouseleave="resetCoordinate" @mouseenter="resetScale"></nuxt-link>
 
     <h2 class="title">Личный кабинет охранного предприятия</h2>
     <div class="meta">
@@ -63,7 +63,9 @@
 </template>
 
 <script setup>
+import {useStore} from '@/stores/store.js'
 import { ref, reactive } from "vue";
+const store = useStore()
 const props = defineProps(["light"]);
 const item = ref(null);
 const coordinates = reactive({

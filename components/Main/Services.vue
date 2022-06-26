@@ -1,5 +1,9 @@
 <template>
-  <section class="services" :class="{'before-dark-mode': !store.darkMode}" ref="servicesNode">
+  <section
+    class="services"
+    :class="{ 'before-dark-mode': !store.darkMode }"
+    ref="servicesNode"
+  >
     <div class="container">
       <div class="row center">
         <div class="col-3">
@@ -33,11 +37,8 @@
                   <p class="text">
                     {{ item.body }}
                   </p>
-                  <nuxt-link to="/">
-                    <button class="btn min-btn">
-                      Заполнить бриф
-                      <img src="@/assets/images/btn-arrow.svg" alt="" />
-                    </button>
+                  <nuxt-link to="/brif">
+                    <FormBtn :name="'Заполнить бриф'" />
                   </nuxt-link>
                 </div>
               </li>
@@ -45,15 +46,15 @@
           </h2>
         </div>
         <div class="col-3">
-          <div class="screens-block">
+          <div class="screens-block" :class="{ active: screenBlocksActive }">
             <div class="screen">
-              <img src="@/assets/images/screen.png" alt="" class="image" />
+              <img src="@/assets/images/screen_3.png" alt="" class="image" />
             </div>
             <div class="screen">
-              <img src="@/assets/images/screen.png" alt="" class="image" />
+              <img src="@/assets/images/screen_2.png" alt="" class="image" />
             </div>
             <div class="screen">
-              <img src="@/assets/images/screen.png" alt="" class="image" />
+              <img src="@/assets/images/screen_1.png" alt="" class="image" />
             </div>
           </div>
         </div>
@@ -63,10 +64,9 @@
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import {useStore} from '@/stores/store.js'
+import { useStore } from "@/stores/store.js";
 
-
-const store = useStore()
+const store = useStore();
 const index = ref(null);
 const serviceItems = ref([
   {
@@ -91,7 +91,7 @@ const serviceItems = ref([
   },
 ]);
 const servicesNode = ref(null);
-
+const screenBlocksActive = ref(false);
 
 const openServiceItem = (idx) => {
   if (index.value === null) {
@@ -111,9 +111,11 @@ onMounted(() => {
   const callBack = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        store.darkMode = true
+        store.darkMode = true;
+        screenBlocksActive.value = true;
       } else {
-        store.darkMode = false
+        store.darkMode = false;
+        screenBlocksActive.value = false;
       }
     });
   };
@@ -122,10 +124,7 @@ onMounted(() => {
   observer.observe(servicesNode.value);
   //change dark mode
 });
-onUnmounted(() => {
-})
-
-
+onUnmounted(() => {});
 </script>
 <style lang="scss">
 .services {
@@ -161,6 +160,8 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  background: transparent;
+  margin-top: 1rem;
 }
 .services {
   position: relative;
@@ -211,7 +212,7 @@ onUnmounted(() => {
 
 .services .list > .item .body {
   max-height: 0;
-  transition: all 0.3s ease-in;
+  transition: max-height 0.6s ease;
   overflow: hidden;
 }
 
@@ -248,13 +249,31 @@ onUnmounted(() => {
   border: 0.5rem solid #555555;
 }
 
-
 //before dark mode
 .services.before-dark-mode {
   opacity: 0;
 }
 
+.screens-block {
+  .screen {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  .screen:nth-child(1) {
+    transition: transform 1s ease, opacity 0.5s ease;
+  }
+  .screen:nth-child(2) {
+    transition: transform 0.7s ease, opacity 0.5s ease;
+  }
+  .screen:nth-child(3) {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+}
 
-
-
+.screens-block.active {
+  .screen {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 </style>

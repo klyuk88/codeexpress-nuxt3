@@ -21,6 +21,7 @@ const store = useStore()
 
 <style lang="scss">
 .main-page {
+  overflow-x: hidden;
   transition: background .4s ease;
   h1,
   h2,
