@@ -56,6 +56,13 @@ onMounted(() => {
 <style lang="scss">
 #portfolio {
   transition: opacity 0.4s ease;
+  .section-header {
+    a {
+      @media (max-width: 576px) {
+        display: none;
+      }
+    }
+  }
   .decor-line {
     margin-top: 3rem;
   }

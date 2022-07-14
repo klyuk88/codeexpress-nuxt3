@@ -12,6 +12,7 @@
     "sass-loader": "^13.0.0"
   },
   "dependencies": {
+    "@img-comparison-slider/vue": "^7.6.0",
     "@pinia/nuxt": "^0.1.9",
     "gsap": "^3.10.4",
     "pinia": "^2.0.14",

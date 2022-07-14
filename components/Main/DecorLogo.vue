@@ -48,8 +48,13 @@ onMounted(() => {
   font-size: 20rem;
   color: #fff;
   margin-top: 8rem;
+  @media (max-width: 576px) {
+    font-size: 5rem;
+    margin-top: 3rem;
+  }
 }
 .technologies .decorative-name span {
   font-weight: 400;
+
 }
 </style>

@@ -51,6 +51,10 @@ export default {
         }
       },
     },
+    containerPadding: {
+      type: Number,
+      default: 100,
+    },
     hideAfter: {
       type: Boolean,
       default: false,
@@ -187,7 +191,7 @@ export default {
   },
   methods: {
     onResize () {
-      this.width = this.$el.clientWidth
+      this.width = this.$el.clientWidth || (document.documentElement.clientWidth - this.containerPadding)
       this.height = this.$el.clientHeight
       this.setInitialPosX()
     },
@@ -331,7 +335,59 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+#handle {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 4rem;
+    height: 4rem;
+    background: #161616;
+    border-radius: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .decor-round {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+}
+
+#handle:before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  background-image: url('../../assets/images/handle-left.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(50%);
+}
+#handle:after {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  background-image: url('../../assets/images/handle-right.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.image-compare {
+  .handle {
+    background: #161616;
+  }
+}
 .image-compare {
   position: relative;
   overflow: hidden;

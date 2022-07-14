@@ -5,7 +5,9 @@ export const useStore = defineStore('mainStore', {
     return {
       showNav: false,
       darkMode: false,
-      lightBox: false
+      lightBox: false,
+      loading: false,
+      screens: []
     }
   },
 })

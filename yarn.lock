@@ -275,6 +275,13 @@
   dependencies:
     "mime" "^3.0.0"
 
+"@img-comparison-slider/vue@^7.6.0":
+  "integrity" "sha512-6+xz1JQ1fwxC2d5x+0e+sRD53afeU/lZY/LvXwzySTi1vardHRprH7nkpmXWZMuXQmak5+CoKRsY2D4pJFbeeA=="
+  "resolved" "https://registry.npmjs.org/@img-comparison-slider/vue/-/vue-7.6.0.tgz"
+  "version" "7.6.0"
+  dependencies:
+    "img-comparison-slider" "^7.6.0"
+
 "@ioredis/commands@^1.1.1":
   "integrity" "sha512-fsR4P/ROllzf/7lXYyElUJCheWdTJVJvOTps8v9IWKFATxR61ANOlnoPqhH099xYLrJGpc2ZQ28B3rMeUt5VQg=="
   "resolved" "https://registry.npmjs.org/@ioredis/commands/-/commands-1.1.1.tgz"
@@ -2271,6 +2278,11 @@
   "integrity" "sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ=="
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.0.tgz"
   "version" "5.2.0"
+
+"img-comparison-slider@^7.6.0":
+  "integrity" "sha512-hkWuVdRaYZBDGZRi3K1cUY6RYX/1Yombd5lOwfuUOgSgXe5hkTHEt4OSBhRa2fsz1UyhRZwDfptj7dW2mz7VKQ=="
+  "resolved" "https://registry.npmjs.org/img-comparison-slider/-/img-comparison-slider-7.6.0.tgz"
+  "version" "7.6.0"
 
 "immutable@^4.0.0":
   "integrity" "sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ=="

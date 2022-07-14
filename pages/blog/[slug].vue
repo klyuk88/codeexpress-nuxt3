@@ -18,9 +18,9 @@
           <div class="sidebar">
             <div class="sidebar-cta">
               <h4 class="title">Обсудим<br />ваш проект?</h4>
-              <a href="tel:+79859227045" class="phone-wrap">
-                <EffectWord :title="'+7(985)922 70 45'" />
-              </a>
+              <nuxt-link to="/brif" class="phone-wrap">
+                <EffectWord :title="'Заполнить бриф'" />
+              </nuxt-link>
             </div>
           </div>
         </div>

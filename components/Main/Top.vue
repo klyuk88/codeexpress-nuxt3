@@ -237,12 +237,19 @@ onUnmounted(() => {
   margin-top: 5rem;
   text-transform: uppercase;
   line-height: 1.2;
+  @media screen and (max-width: 576px) {
+    font-size: 1.9rem;
+  }
 }
 .main-screen > .decor-gallary-wrap {
   overflow: hidden;
   height: 90vh;
   background: var(--black);
   margin-top: 6rem;
+  @media (max-width: 1200px) {
+    height: 30rem;
+    margin-top: 3rem;
+  }
 }
 
 .main-screen > .decor-gallary-wrap > .decor-gallery {
@@ -258,10 +265,17 @@ onUnmounted(() => {
 }
 .main-screen > .decor-gallary-wrap .image-box {
   margin: 30px;
+  @media (max-width: 576px) {
+    margin: 15px;
+  }
 }
 .main-screen > .decor-gallary-wrap .image-box img {
   height: 510px;
   width: 310px;
+  @media (max-width: 576px) {
+    height: 390px;
+    width: 220px;
+  }
 }
 .main-screen > .decor-gallary-wrap .image-box.col-odd {
   transform: translateY(0);
@@ -276,6 +290,7 @@ onUnmounted(() => {
       transform: translateY(100%);
       opacity: 0;
     }
+
     .text-line:first-child {
       transition: transform 0.4s ease, opacity 0.4s ease;
     }

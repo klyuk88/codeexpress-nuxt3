@@ -2,14 +2,14 @@
   <section class="technologies lower-indent" ref="tech">
     <div class="container">
       <div class="decor-line"></div>
-      <div class="row">
-        <div class="col-3">
+      <div class="technologies-grid">
+        <div class="col">
           <h2 class="section-title">
             Следуем<br /><span>передовым</span><br />тенденциям<br />
             в разработке
           </h2>
         </div>
-        <div class="col-3">
+        <div class="col">
           <p>
             Мы разрабатываем проекты на одном из самых популярных языков
             программирования <b>JavaScript</b> и его экосистемах.
@@ -141,6 +141,9 @@ onUnmounted(() => {
     grid-template-columns: minmax(max-content, 12.4%) 1fr;
     margin-bottom: 0.5rem;
     transition: all 0.3s ease;
+    @media (max-width: 576px) {
+      grid-template-columns: minmax(max-content, 25%) 1fr;
+    }
     .lang-amount-wrap {
       width: 0%;
       transition: width 1s ease;
@@ -159,6 +162,7 @@ onUnmounted(() => {
   font-weight: 700;
   color: rgba(0, 0, 0, 0.4);
   margin-right: 1rem;
+
 }
 .infographics > .item .lang-amount {
   width: 100%;
@@ -174,4 +178,16 @@ onUnmounted(() => {
   font-size: 0.8rem;
   color: #fff;
 }
+
+.technologies {
+  .technologies-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+    }
+  }
+} 
 </style>

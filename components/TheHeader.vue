@@ -1,8 +1,8 @@
 <template>
   <header class="header" :class="{ dark: store.darkMode }">
     <div class="container">
-      <div class="row center">
-        <div class="col-1">
+      <div class="header-grid">
+        <div>
           <div class="menu flex center" @click="showNavigation">
             <!-- <img src="@/assets/images/menu-icon.svg" alt="" class="menu-icon" /> -->
             <svg
@@ -101,12 +101,12 @@
             <!-- <p class="menu-title">Меню</p> -->
           </div>
         </div>
-        <div class="col-1">
+        <div>
           <NuxtLink to="/">
             <img src="@/assets/images/logo-black.svg" alt="" class="logo" />
           </NuxtLink>
         </div>
-        <div class="col">
+        <div>
           <div class="col-wrap">
             <nuxt-link to="/brif">
               <EffectWord :title="'Заполнить бриф'" />
@@ -135,11 +135,33 @@ const showNavigation = () => {
   top: 0;
   z-index: 100;
   transition: background 0.3s ease, color 0.3s ease;
+  .header-grid {
+    display: grid;
+    grid-template-columns: 16.6% 16.6% 1fr;
+    column-gap: 20px;
+    align-items: center;
+    @media screen and (max-width: 576px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    .col {
+      justify-self: end;
+    }
+    > div:nth-child(2) {
+      @media screen and (max-width: 576px) {
+        justify-self: end;
+      }
+    }
+  }
   .menu {
     display: inline-flex;
     .link {
       font-weight: 600;
       color: #000;
+    }
+    .link-wrap {
+      @media screen and(max-width: 576px) {
+        display: none;
+      }
     }
   }
   .menu:hover {
@@ -180,6 +202,9 @@ const showNavigation = () => {
 
 .header .link-wrap {
   text-align: right;
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
 }
 
 .header .container {
@@ -187,11 +212,12 @@ const showNavigation = () => {
 }
 
 .header .logo {
-  width: 7vw;
+  width: 7rem;
+  
 }
 
 .header .decor-line {
-  margin-top: 20px;
+  margin-top: 1.3rem;
   width: 0%;
   animation: widthProgress 1s ease 0.3s 1 normal both;
 }

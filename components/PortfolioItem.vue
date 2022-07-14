@@ -3,9 +3,14 @@
     class="portfolio-item flex center column j-center"
     :class="{ light: !store.darkMode }"
     ref="item"
-    
   >
-  <nuxt-link to="/projects/best_work" class="item-link" @mousemove="moveThumb" @mouseleave="resetCoordinate" @mouseenter="resetScale"></nuxt-link>
+    <nuxt-link
+      to="/projects/best_work"
+      class="item-link"
+      @mousemove="moveThumb"
+      @mouseleave="resetCoordinate"
+      @mouseenter="resetScale"
+    ></nuxt-link>
 
     <h2 class="title">Личный кабинет охранного предприятия</h2>
     <div class="meta">
@@ -48,11 +53,14 @@
         </g>
       </svg>
     </div>
-    <div class="thumb-block"
-    :style="{
-      transform: `translate3d(${coordinates.x * 0.08 }vw, ${coordinates.y * 0.03 }vh, 0) rotateZ(${coordinates.x * 0.02 }deg) scale3d(${scale},1,1)`,
-      }">
-
+    <div
+      class="thumb-block"
+      :style="{
+        transform: `translate3d(${coordinates.x * 0.08}vw, ${
+          coordinates.y * 0.03
+        }vh, 0) rotateZ(${coordinates.x * 0.02}deg) scale3d(${scale},1,1)`,
+      }"
+    >
       <img
         src="https://images.unsplash.com/photo-1648737155328-0c0012cf2f20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
         alt=""
@@ -63,30 +71,30 @@
 </template>
 
 <script setup>
-import {useStore} from '@/stores/store.js'
+import { useStore } from "@/stores/store.js";
 import { ref, reactive } from "vue";
-const store = useStore()
+const store = useStore();
 const props = defineProps(["light"]);
 const item = ref(null);
 const coordinates = reactive({
   x: 0,
   y: 0,
 });
-const scale = ref(1.2)
+const scale = ref(1.2);
 const moveThumb = (event) => {
-  let w = event.currentTarget.clientWidth
-  let h = event.currentTarget.clientHeight
+  let w = event.currentTarget.clientWidth;
+  let h = event.currentTarget.clientHeight;
   coordinates.x = event.offsetX - w / 2;
   coordinates.y = event.offsetY - h / 2;
 };
 const resetCoordinate = () => {
   coordinates.x = 0;
   coordinates.y = 0;
-  scale.value = 1.1
-}
+  scale.value = 1.1;
+};
 const resetScale = () => {
-  scale.value = 1
-}
+  scale.value = 1;
+};
 </script>
 
 <style lang="scss">
@@ -103,6 +111,11 @@ const resetScale = () => {
     line-height: 1.3;
     z-index: 1;
     transition: color 0.2s ease;
+    color: rgba($color: #fff, $alpha: 0.5);
+    @media (max-width: 576px) {
+      font-size: 1.5rem;
+      width: 100%;
+    }
   }
   .meta {
     display: flex;
@@ -147,9 +160,16 @@ const resetScale = () => {
     height: 20rem;
     z-index: 0;
     opacity: 0;
-    transition: transform 0.3s linear, opacity .5s ease;
+    transition: transform 0.3s linear, opacity 0.5s ease;
     transform-style: preserve-3d;
     will-change: transform;
+    @media (max-width: 567px) {
+      opacity: 1;
+      width: 80%;
+      height: 13rem;
+      position: relative;
+      margin-top: 1rem;
+    }
     .thumb {
       position: absolute;
       width: 100%;

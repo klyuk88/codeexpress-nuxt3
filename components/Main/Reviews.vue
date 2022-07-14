@@ -1,7 +1,7 @@
 <template>
   <section id="reviews">
     <div class="container">
-      <div class="row">
+      <div class="reviews-grid">
         <div class="col-3">
           <h2 class="section-title">
             <span>Отзывы</span><br />о нашей<br />работе
@@ -61,6 +61,15 @@ const playSwiper = () => {
   padding-top: var(--section-top);
   .decor-line {
     margin-top: var(--section-bottom);
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    gap: 20px;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+    }
   }
 }
 </style>

@@ -20,9 +20,9 @@
           <li>
             <nuxt-link to="/projects">Проекты</nuxt-link>
           </li>
-          <!-- <li>
+          <li>
             <nuxt-link to="/services">Услуги</nuxt-link>
-          </li> -->
+          </li>
           <li>
             <nuxt-link to="/blog">Статьи</nuxt-link>
           </li>
@@ -30,10 +30,7 @@
       </div>
       <div>
         <div class="nav-image">
-          <img
-            src="@/assets/images/abstract_2.jpg"
-            alt=""
-          />
+          <img src="@/assets/images/abstract_2.jpg" alt="" />
         </div>
         <div class="nav-contacts-block">
           <a href="tel:+79859227045" class="link">+7 985 922 70 45</a>
@@ -82,7 +79,17 @@
 </template>
 <script setup>
 import { useStore } from "@/stores/store.js";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+
+router.afterEach((to, from) => {
+  if (store.showNav) {
+    setTimeout(() => {
+      closeNav();
+    }, 300);
+  }
+});
 
 const store = useStore();
 const closeNav = () => {
@@ -99,6 +106,10 @@ const closeNav = () => {
   z-index: 1000;
   padding: 0 2rem;
   transform: translateX(-200%);
+  transition: transform 0.7s ease;
+  @media (max-width: 576px) {
+    padding: 0 0.9rem;
+  }
   .linesBackground {
     position: absolute;
     width: 100%;
@@ -113,15 +124,15 @@ const closeNav = () => {
       background: var(--black);
     }
     .bg-line:first-child {
-      transition: width 1s ease;
+      transition: width 1s ease 0.5s;
     }
     .bg-line:nth-child(2) {
       width: 0;
-      transition: width 0.5s ease;
+      transition: width 0.5s ease 0.5s;
     }
     .bg-line:last-child {
       width: 0;
-      transition: width 0.3s ease;
+      transition: width 0.3s ease 0.5s;
     }
   }
   .nav-header-block {
@@ -133,7 +144,7 @@ const closeNav = () => {
     z-index: 1;
     position: relative;
     opacity: 0;
-    transition: opacity 0.3s ease 1s;
+    transition: opacity 0.3s ease 1.3s;
     .line {
       width: 0;
       height: 1px;
@@ -141,7 +152,7 @@ const closeNav = () => {
       bottom: 0;
       left: 0;
       position: absolute;
-      transition: width .3s ease 1.2s;
+      transition: width 0.3s ease 1.3s;
     }
     .nav-logo {
       width: 8rem;
@@ -169,7 +180,11 @@ const closeNav = () => {
     z-index: 1;
     position: relative;
     opacity: 0;
-    transition: opacity 0.3s ease 1s;
+    transition: opacity 0.3s ease 1.3s;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      margin-top: 4rem;
+    }
     .nav {
       padding: 0;
       list-style: none;
@@ -181,6 +196,9 @@ const closeNav = () => {
           font-family: "Artegra";
           text-transform: uppercase;
           transition: color 0.1s ease;
+          @media (max-width: 576px) {
+            font-size: 3rem;
+          }
         }
         a:hover {
           color: var(--accent);
@@ -192,6 +210,9 @@ const closeNav = () => {
       width: 100%;
       height: 25rem;
       background: #eee;
+      @media (max-width: 576px) {
+        display: none;
+      }
       img {
         position: absolute;
         width: 100%;
@@ -239,7 +260,4 @@ const closeNav = () => {
   }
 }
 
-// .router-link-active {
-//   color: var(--accent) !important;
-// }
 </style>

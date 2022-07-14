@@ -5,7 +5,7 @@
       <h2 class="section-title">
         Заботимся<br/>о <span>комфортном</span><br> взаимодействии с нами
       </h2>
-      <div class="row">
+      <div class="benifits-grid">
         <div class="col">
           <span class="item-num">01</span>
           <p class="item-text">Поэтапная система оплаты, с этапом от 1 недели</p>
@@ -24,7 +24,7 @@
 </template>
 <script setup>
 </script>
-<style>
+<style lang="scss">
 .benifits .decor-line {
     margin-bottom: var(--section-bottom);
 }
@@ -41,5 +41,21 @@
 
 .benifits > .container > .row {
     margin-top: 3.5rem;
+}
+
+.benifits {
+  .benifits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 100%;
+    margin-top: 4rem;
+    @media (max-width: 1200px) {
+      grid-template-columns: 100%;
+      margin-top: 2rem;
+
+    }
+  }
 }
 </style>

@@ -8,14 +8,16 @@
     <MainDesign />
     <MainPortfolio />
     <MainReviews />
+    <client-only>
+      <Compare/>
+    </client-only>
+    
     <MainCTA />
   </div>
 </template>
-
 <script setup>
 import {useStore} from '@/stores/store.js'
 const store = useStore()
-
 
 </script>
 
@@ -47,8 +49,6 @@ const store = useStore()
   .decor-line {
     background: #fff;
   }
-  .portfolio-item .title {
-    color: rgba($color: #fff, $alpha: 0.5);
-  }
+ 
 }
 </style>

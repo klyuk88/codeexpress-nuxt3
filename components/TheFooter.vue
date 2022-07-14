@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="row">
+      <div class="footer-grid">
         <div class="col-3 flex column j-between">
           <div class="row">
             <div class="col-2">
@@ -78,8 +78,17 @@
 <style lang="scss">
 .footer {
   background: var(--black);
-  padding: 4rem 0;
+  padding-top: var(--section-bottom);
+  padding-bottom: 2rem;
   overflow: hidden;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+    }
+  }
   .foo-contacts {
     gap: 1rem;
   }
@@ -94,6 +103,9 @@
     text-transform: uppercase;
     line-height: 1;
     transform: translateY(1.2rem);
+    @media (max-width: 576px) {
+      font-size: 5rem;
+    }
     span {
       font-weight: 400;
     }
@@ -102,6 +114,11 @@
   .foo-politic {
     color: rgba($color: #fff, $alpha: 0.5);
     font-size: 1rem;
+    @media (max-width: 576px) {
+      margin-top: 2rem;
+      display: block;
+    }
   }
+
 }
 </style>

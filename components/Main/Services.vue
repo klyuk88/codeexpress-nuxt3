@@ -5,8 +5,8 @@
     ref="servicesNode"
   >
     <div class="container">
-      <div class="row center">
-        <div class="col-3">
+      <div class="services-grid">
+        <div class="col">
           <h2 class="section-title">
             Возьмёмся за <br />проект <span>любой</span><br />
             сложности
@@ -45,16 +45,15 @@
             </ul>
           </h2>
         </div>
-        <div class="col-3">
-          <div class="screens-block" :class="{ active: screenBlocksActive }">
-            <div class="screen">
-              <img src="@/assets/images/screen_3.png" alt="" class="image" />
-            </div>
-            <div class="screen">
-              <img src="@/assets/images/screen_2.png" alt="" class="image" />
-            </div>
-            <div class="screen">
-              <img src="@/assets/images/screen_1.png" alt="" class="image" />
+        <div class="col">
+          <div class="screens-block">
+            <div
+              class="screen"
+              v-for="(item, idx) in screens"
+              :key="idx"
+              ref="screensNodes"
+            >
+              <img :src="item.url" alt="" class="image" />
             </div>
           </div>
         </div>
@@ -65,6 +64,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useStore } from "@/stores/store.js";
+import ScreenOne from "@/assets/images/screen_1.png";
+import ScreenTwo from "@/assets/images/screen_2.png";
+import ScreenThree from "@/assets/images/screen_3.png";
 
 const store = useStore();
 const index = ref(null);
@@ -92,7 +94,21 @@ const serviceItems = ref([
 ]);
 const servicesNode = ref(null);
 const screenBlocksActive = ref(false);
-
+const screens = ref([
+  {
+    id: 1,
+    url: ScreenThree,
+  },
+  {
+    id: 2,
+    url: ScreenTwo,
+  },
+  {
+    id: 3,
+    url: ScreenOne,
+  },
+]);
+const screensNodes = ref(null);
 const openServiceItem = (idx) => {
   if (index.value === null) {
     index.value = idx;
@@ -112,16 +128,31 @@ onMounted(() => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         store.darkMode = true;
-        screenBlocksActive.value = true;
       } else {
         store.darkMode = false;
-        screenBlocksActive.value = false;
+      }
+    });
+  };
+
+  const callBackScreens = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      } else {
+        entry.target.classList.remove("active");
       }
     });
   };
 
   const observer = new IntersectionObserver(callBack, options);
   observer.observe(servicesNode.value);
+
+  const observerScreens = new IntersectionObserver(callBackScreens, options);
+
+  screensNodes.value.forEach((item) => {
+    observerScreens.observe(item);
+  });
+
   //change dark mode
 });
 onUnmounted(() => {});
@@ -130,8 +161,10 @@ onUnmounted(() => {});
 .services {
   padding-top: var(--section-top);
   padding-bottom: 10rem;
-  // background: var(--black);
   transition: opacity 0.5s ease;
+  @media (max-width: 576px) {
+    padding-bottom: var(--section-bottom);
+  }
 }
 .services .section-title {
   color: #fff;
@@ -192,6 +225,20 @@ onUnmounted(() => {});
     top: 0;
     right: 0;
     transform: translateX(-40%) translateY(25%);
+    @media (max-width: 576px) {
+      position: relative;
+      transform: translateX(0) translateY(0);
+    }
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 20px;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      gap: 40px;
+    }
   }
 }
 
@@ -202,6 +249,9 @@ onUnmounted(() => {});
   text-transform: none;
   color: #fff;
   transition: color 0.1s ease;
+  @media (max-width: 576px) {
+    font-size: 1.5rem;
+  }
 }
 
 .services .list > .item .header .open-icon {
@@ -231,11 +281,18 @@ onUnmounted(() => {});
   border-radius: 1.2rem;
   margin: 0 auto;
   position: relative;
+  @media (max-width: 576px) {
+    width: 100%;
+    height: 13rem;
+  }
 }
 
 .services .screens-block .screen:nth-child(2),
 .services .screens-block .screen:nth-child(3) {
   margin-top: -5rem;
+    @media (max-width: 576px) {
+      margin-top: -3rem;
+    }
 }
 
 .services .screen .image {
@@ -247,6 +304,9 @@ onUnmounted(() => {});
   left: 0;
   border-radius: 1.2rem;
   border: 0.5rem solid #555555;
+  @media (max-width: 576px) {
+    border-width: 0.4rem; 
+  }
 }
 
 //before dark mode
@@ -258,20 +318,12 @@ onUnmounted(() => {});
   .screen {
     transform: translateX(50%);
     opacity: 0;
-  }
-  .screen:nth-child(1) {
     transition: transform 1s ease, opacity 0.5s ease;
-  }
-  .screen:nth-child(2) {
-    transition: transform 0.7s ease, opacity 0.5s ease;
-  }
-  .screen:nth-child(3) {
-    transition: transform 0.5s ease, opacity 0.5s ease;
   }
 }
 
-.screens-block.active {
-  .screen {
+.screens-block {
+  .screen.active {
     transform: translateX(0);
     opacity: 1;
   }

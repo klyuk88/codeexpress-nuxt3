@@ -33,6 +33,9 @@ const props = defineProps(["name"]);
     position: relative;
     transition: transform 0.3s ease;
     display: inline-block;
+    @media (max-width: 576px) {
+      font-size: 1rem;
+    }
   }
   .title:after {
     content: attr(data-name);
