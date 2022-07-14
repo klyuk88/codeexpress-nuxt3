@@ -6,11 +6,12 @@
     <MainBenifits />
     <MainTechnologies />
     <MainDesign />
-    <MainPortfolio />
-    <MainReviews />
-    <!-- <client-only>
+      <!-- <client-only>
       <Compare/>
     </client-only> -->
+    <MainPortfolio />
+    <MainReviews />
+  
     
     <MainCTA />
   </div>
