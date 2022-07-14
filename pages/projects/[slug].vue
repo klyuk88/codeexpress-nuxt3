@@ -58,11 +58,18 @@ export default {};
     gap: 20px;
     align-items: flex-end;
     padding: 7rem 0;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      padding: 3rem 0
+    }
   }
   .cover-block {
     position: relative;
     width: 100%;
     height: 90vh;
+    @media (max-width: 576px) {
+      height: 15rem;
+    }
     // margin-bottom: 4rem;
     .cover {
       position: absolute;
@@ -84,6 +91,9 @@ export default {};
     top: 0;
     z-index: 200;
     background: var(--light);
+    @media (max-width: 576px) {
+      margin: 2rem 0 2rem 0;
+    }
     .sp-link {
       padding: 1rem 0;
       display: inline-block;
@@ -94,6 +104,10 @@ export default {};
     grid-template-columns: 33.3% 1fr;
     gap: 20px;
     padding-bottom: 6rem;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      padding-bottom: 0;
+    }
     .sidebar-block {
       .sidebar {
         position: sticky;
@@ -106,24 +120,37 @@ export default {};
           color: #000;
           font-weight: 700;
           text-transform: uppercase;
+          @media (max-width: 576px) {
+            font-size: 1rem;
+          }
         }
         .services-list {
           list-style: none;
           padding: 0;
           margin-top: 2rem;
+          @media (max-width: 576px) {
+            margin-top: 1rem;
+          }
           .item {
             text-transform: uppercase;
             font-weight: 700;
             font-size: 1rem;
             color: rgba($color: #000000, $alpha: 0.5);
             margin-bottom: 1rem;
+            @media (max-width: 576px) {
+              margin-bottom: 0.5rem;
+            }
           }
         }
         .sidebar-cta {
           margin-top: 15rem;
+          @media (max-width: 576px) {
+            display: none;
+          }
           .title {
             font-size: 1.1rem;
             line-height: 1.2;
+        
           }
           .sidebar-link {
             display: inline-block;

@@ -25,6 +25,9 @@
     position: relative;
     height: 30rem;
     cursor: pointer;
+    @media (max-width: 576px) {
+      height: 15rem;
+    }
     img {
       position: absolute;
       width: 100%;
@@ -39,6 +42,10 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
+    @media (max-width: 576px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
     .title {
       font-size: 1rem;
       text-transform: uppercase;

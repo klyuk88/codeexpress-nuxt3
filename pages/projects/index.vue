@@ -1,7 +1,7 @@
 <template>
   <section id="projects">
     <div class="container">
-      <div class="row end">
+      <div class="projects-grid">
         <div class="col-4">
           <h1 class="page-title">
             Проекты, которые мы <span>можем</span> показать
@@ -16,9 +16,9 @@
       </div>
 
       <div class="projects-items-block">
-        <div class="filter flex center j-between">
+        <div class="filter">
           <h2 class="title">Фильтр:</h2>
-          <ul class="filters flex center">
+          <ul class="filters">
             <li>Сайт</li>
             <li>Веб-сервис</li>
             <li>Интернет-магазин</li>
@@ -45,18 +45,33 @@
     font-size: 1.2rem;
     width: 80%;
     transform: translateY(-1rem);
+    @media (max-width: 576px) {
+      font-size: 0.9rem;
+    }
   }
   .projects-items-block {
     margin-top: 10rem;
+    @media (max-width: 576px) {
+      margin-top: 2rem;
+    }
     .filter {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      justify-content: space-between;
       .title {
         font-size: 1.5rem;
         text-transform: uppercase;
+        @media (max-width: 576px) {
+          font-size: 1rem;
+        }
       }
       .filters {
         list-style: none;
         padding: 0;
-        gap: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        width: 100%;
         li {
           font-size: 1.1rem;
           color: rgba(0, 0, 0, 0.4);
@@ -64,6 +79,9 @@
           font-weight: 700;
           cursor: pointer;
           transition: color .1s ease;
+          @media (max-width: 576px) {
+            font-size: 1rem;
+          }
         }
         li:hover {
           color: var(--accent);
@@ -76,6 +94,19 @@
     }
     .items {
       margin-top: 3rem;
+      @media (max-width: 576px) {
+        margin-top: 0;
+      }
+    }
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 33%;
+    gap: 20px;
+    width: 100%;
+    align-items: end;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
     }
   }
 }
