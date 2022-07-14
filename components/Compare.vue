@@ -15,13 +15,7 @@
   </ImgComparisonSlider>
 </template>
 
-<script>
+<script setup>
 import { ImgComparisonSlider } from '@img-comparison-slider/vue';
 
-export default {
-  name: 'ExampleComponent',
-  components: {
-    ImgComparisonSlider,
-  },
-};
 </script>
