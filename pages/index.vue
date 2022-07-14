@@ -11,7 +11,6 @@
     </client-only>
     <MainPortfolio />
     <MainReviews />
-
     <MainCTA />
   </div>
 </template>

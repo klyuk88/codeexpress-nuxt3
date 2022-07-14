@@ -42,11 +42,19 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
 <style lang="scss">
 #services-page {
   padding-top: var(--section-top);
+  @media (max-width: 576px) {
+    overflow: hidden;
+  }
   .services-title-block {
     display: grid;
     grid-template-columns: 16.7% 1fr;
     padding-bottom: 4.5rem;
     position: relative;
+    // overflow: hidden;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      padding-bottom: 2rem;
+    }
     .big-title {
       position: absolute;
       font-size: 25rem;
@@ -58,6 +66,10 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
       text-transform: uppercase;
       z-index: -1;
       font-family: "Raleway";
+      @media (max-width: 576px) {
+        font-size: 9rem;
+        // display: none;
+      }
     }
   }
   .marqee {
@@ -65,14 +77,23 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
     font-size: 1.5rem;
     color: rgba($color: #000000, $alpha: 0.5);
     font-weight: 700;
+    @media (max-width: 576px) {
+      font-size: 0.9rem;
+    }
   }
   .service-page-content {
     margin-top: var(--section-top);
     display: grid;
     grid-template-columns: 33% 1fr;
     gap: 20px;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+    }
   }
   .service-page-sidebar-block {
+    @media (max-width: 576px) {
+      display: none;
+    }
     .sidebar-cta {
       position: sticky;
       position: -webkit-sticky;
@@ -93,6 +114,7 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
+    padding-bottom: 5rem;   
   }
 }
 </style>

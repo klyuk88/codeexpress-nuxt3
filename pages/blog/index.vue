@@ -52,18 +52,29 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
     display: grid;
     grid-template-columns: 16.7% 1fr;
     padding-bottom: 4.5rem;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      padding-bottom: 2rem;
+    }
   }
   .marqee {
     text-transform: uppercase;
     font-size: 1.5rem;
     color: rgba($color: #000000, $alpha: 0.5);
     font-weight: 700;
+     @media (max-width: 576px) {
+      font-size: 0.9rem;
+    }
   }
   .blog-content-block {
     display: grid;
     grid-template-columns: 33.4% 1fr;
     gap: 20px;
     margin-top: 8rem;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      margin-top: 3rem;
+    }
     .sidebar {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -71,6 +82,9 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
         font-size: 1.5rem;
         color: var(--black);
         text-transform: uppercase;
+        @media (max-width: 576px) {
+          font-size: 1rem;
+        }
       }
       .filter-block {
         padding: 0;
@@ -84,6 +98,7 @@ import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.v
             text-transform: uppercase;
             color: rgba($color: #000000, $alpha: 0.5);
             transition: color .1s ease;
+            
           }
           a:hover {
             color: var(--accent);
