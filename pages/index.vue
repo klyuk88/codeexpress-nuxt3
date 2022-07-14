@@ -8,9 +8,9 @@
     <MainDesign />
     <MainPortfolio />
     <MainReviews />
-    <client-only>
+    <!-- <client-only>
       <Compare/>
-    </client-only>
+    </client-only> -->
     
     <MainCTA />
   </div>
