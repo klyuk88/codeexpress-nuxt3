@@ -1,31 +1,29 @@
 <template>
-  <div class="main-page" :class="{'dark': store.darkMode}">
+  <div class="main-page" :class="{ dark: store.darkMode }">
     <MainTop />
     <MainAbout />
     <MainServices />
     <MainBenifits />
     <MainTechnologies />
     <MainDesign />
-      <!-- <client-only>
-      <Compare/>
-    </client-only> -->
+    <client-only>
+      <Compare />
+    </client-only>
     <MainPortfolio />
     <MainReviews />
-  
-    
+
     <MainCTA />
   </div>
 </template>
 <script setup>
-import {useStore} from '@/stores/store.js'
-const store = useStore()
-
+import { useStore } from '@/stores/store.js';
+const store = useStore();
 </script>
 
 <style lang="scss">
 .main-page {
   overflow-x: hidden;
-  transition: background .4s ease;
+  transition: background 0.4s ease;
   h1,
   h2,
   h3,
@@ -33,7 +31,7 @@ const store = useStore()
   h5,
   h6,
   p {
-    transition: color .4s ease;
+    transition: color 0.4s ease;
   }
 }
 .main-page.dark {
@@ -50,6 +48,5 @@ const store = useStore()
   .decor-line {
     background: #fff;
   }
- 
 }
 </style>
