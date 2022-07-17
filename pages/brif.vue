@@ -1,14 +1,16 @@
 <template>
   <section id="brif">
     <div class="container">
-      <div class="row">
+      <div class="brif-grid">
         <div class="col-3">
+          <div class="fixed-sidebar">
             <h1 class="page-title">
               Заполните<br />пожалуйста<br /><span>бриф</span>
             </h1>
             <p class="subtitle">
               При заказе проекта базовая <b>SEO оптимизация</b> в подарок
             </p>
+          </div>
         </div>
         <div class="col-3">
           <form class="brif-form">
@@ -70,16 +72,38 @@
 <style lang="scss">
 #brif {
   padding-top: var(--section-bottom);
+  .brif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+    }
+  }
+  .fixed-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 7rem;
+  }
   .subtitle {
     font-size: 1.5rem;
     margin-top: 3rem;
     width: 50%;
+    @media (max-width: 576px) {
+      font-size: 1rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
   }
   .brif-form {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3.5rem;
     padding-bottom: 10rem;
+    @media (max-width: 576px) {
+      gap: 2rem;
+      padding-bottom: 5rem;
+    }
     .form-agree {
       margin-top: 2rem;
     }
@@ -91,13 +115,23 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
+        @media (max-width: 576px) {
+          grid-template-columns: 100%;
+        }
       }
       .inputs-block {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
+        @media (max-width: 576px) {
+          grid-template-columns: 100%;
+          gap: 1.5rem;
+        }
         .item:last-child {
           grid-column: 1/3;
+          @media (max-width: 576px) {
+            grid-column: 1/1;
+          }
         }
       }
     }

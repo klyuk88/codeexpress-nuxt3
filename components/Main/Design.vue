@@ -18,21 +18,21 @@
       </div>
       <div id="interactive-design">
         <client-only>
-          <ImageCompare :before="before" :after="after"></ImageCompare> 
+          <Compare />
         </client-only>
-        
+        <!-- <client-only>
+          <ImageCompare :before="before" :after="after"></ImageCompare> 
+        </client-only> -->
       </div>
     </div>
   </section>
 </template>
 <script setup>
 import ImageCompare from "@/components/Main/ImageCompare.vue";
-import before from '@/assets/images/mm_cover_before.jpg'
-import after from '@/assets/images/mm_cover_after.jpg'
+
 import { ref, onMounted } from "vue";
 // const before = ref("demo-screen.webp");
 // const after = ref("proto-demoX4.webp");
-
 </script>
 
 <style lang="scss">
@@ -63,5 +63,4 @@ import { ref, onMounted } from "vue";
     }
   }
 }
-
 </style>

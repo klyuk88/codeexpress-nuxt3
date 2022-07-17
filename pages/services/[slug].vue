@@ -102,7 +102,7 @@ onMounted(() => {
   const options = {
     root: null,
     rootMargin: "0px",
-    threshold: 0.2,
+    threshold: 0.1,
   };
 
   const callBack = (entries, observer) => {
@@ -129,6 +129,9 @@ onMounted(() => {
     padding-bottom: 4.5rem;
     position: relative;
     align-items: end;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+    }
     .service-single-subtitle {
       margin-top: 2rem;
     }
@@ -142,12 +145,18 @@ onMounted(() => {
       border: 2px solid #000;
       margin-left: auto;
       transform: rotate(90deg);
+      @media (max-width: 576px) {
+        margin-left: 0;
+      }
     }
   }
   .service-single-image-block {
     width: 100%;
     height: 35rem;
     position: relative;
+    @media (max-width: 576px) {
+      height: 15rem;
+    }
     img {
       position: absolute;
       width: 100%;
@@ -173,6 +182,10 @@ onMounted(() => {
       grid-template-columns: 33% 1fr;
       gap: 20px;
       margin-top: var(--section-bottom);
+      @media (max-width: 576px) {
+        grid-template-columns: 100%;
+        row-gap: 40px;
+      }
       .stiky-title-block {
         position: sticky;
         position: -webkit-sticky;

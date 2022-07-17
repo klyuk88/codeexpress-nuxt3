@@ -6,9 +6,6 @@
     <MainBenifits />
     <MainTechnologies />
     <MainDesign />
-    <client-only>
-      <Compare />
-    </client-only>
     <MainPortfolio />
     <MainReviews />
     <MainCTA />

@@ -198,6 +198,7 @@ onUnmounted(() => {});
 }
 .services {
   position: relative;
+  z-index: 1;
   .list {
     .item {
       .header:hover {

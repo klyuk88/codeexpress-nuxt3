@@ -45,6 +45,10 @@
     gap: 20px;
     align-items: flex-end;
     padding: 7rem 0;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      padding: 3rem 0;
+    }    
     .meta {
       display: flex;
       align-items: center;
@@ -59,6 +63,9 @@
     width: 100%;
     height: 90vh;
     margin-bottom: 4rem;
+    @media (max-width: 576px) {
+      height: 15rem;
+    }
     .cover {
       position: absolute;
       width: 100%;
@@ -73,7 +80,14 @@
     grid-template-columns: 33.3% 1fr;
     gap: 20px;
     padding-bottom: 6rem;
+    @media (max-width: 576px) {
+      grid-template-columns: 100%;
+      padding-bottom: 0;
+    }
     .sidebar-block {
+      @media (max-width: 576px) {
+        display: none;
+      }
       .sidebar {
         position: sticky;
         position: -webkit-sticky;
