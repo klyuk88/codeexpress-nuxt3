@@ -19,8 +19,8 @@
               delay: 5000,
             }"
           >
-            <SwiperSlide v-for="(item, idx) in 5" :key="idx">
-              <ReviewItem @blockSwiper="blockSwiper"/>
+            <SwiperSlide v-for="(item, idx) in reviewsStore.reviews" :key="idx">
+              <ReviewItem @blockSwiper="blockSwiper" :company="item.attributes.company" :review="item.attributes.text" :logo="item.attributes.logo.data.attributes.url" :scan="item.attributes.scan.data.attributes.url" @setImage="setImage"/>
             </SwiperSlide>
           </Swiper>
         </div>
@@ -28,32 +28,41 @@
       <div class="decor-line"></div>
     </div>
   </section>
-  <ReviewLightBox v-if="store.lightBox" @playSwiper="playSwiper"/>
+  <ReviewLightBox v-if="store.lightBox" @playSwiper="playSwiper" :image="lightBoxImage"/>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { useStore } from "@/stores/store.js";
+import { useReviews } from "@/stores/reviews.js";
 import "swiper/css";
 import "swiper/css/autoplay";
 
 const store = useStore();
-const slider = ref(null)
+const reviewsStore = useReviews();
+const slider = ref(null);
+const lightBoxImage = ref(null)
 const onSwiper = (swiper) => {
-  slider.value = swiper
+  slider.value = swiper;
 };
 
 const blockSwiper = () => {
-  slider.value.autoplay.stop()
-}
+  slider.value.autoplay.stop();
+};
 
 const playSwiper = () => {
-  slider.value.autoplay.start()
+  slider.value.autoplay.start();
+};
+
+const setImage = (scan) => {
+  lightBoxImage.value = scan
 }
 
-
+onMounted(() => {
+  reviewsStore.getReviews();
+});
 </script>
 
 <style lang="scss">

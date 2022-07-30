@@ -1,28 +1,40 @@
 <template>
 
   <div class="review-item">
+    <div class="test"></div>
     <div class="ri-header flex start">
-      <img src="@/assets/images/reviews/mai_logo.png" alt="" class="ri-logo"/>
-      <h4 class="ri-title">Московский Авиационный институт</h4>
+      <img :src="apiURL + logo" alt="" class="ri-logo"/>
+      <h4 class="ri-title">{{company}}</h4>
     </div>
     <div class="ri-text">
-      Далеко-далеко за словесными горами в стране гласных и согласных живут, рыбные тексты. Гор жизни, обеспечивает, диких переписывается грамматики сих там себя он выйти однажды последний меня имеет океана правилами ручеек журчит инициал заглавных страна одна которое свой своих от всех оксмокс заманивший. Рыбного!
+      {{review}}
     </div>
      <EffectWord :title="'Смотреть скан'" @click.prevent="openLightbox"/>
   </div>
+
 </template>
 
 <script setup>
 import {useStore} from '@/stores/store.js'
+import {apiURL} from '@/composables/useEnv.js'
 const store = useStore()
-const emit = defineEmits(['blockSwiper'])
+const emit = defineEmits(['blockSwiper','setImage'])
+const props = defineProps({
+  company: String,
+  review: String,
+  logo: String,
+  scan: String
+
+})
 const openLightbox = () => {
     store.lightBox = true
     emit('blockSwiper')
+    emit('setImage', apiURL + props.scan)
 }
 </script>
 
 <style lang="scss">
+
 .review-item {
   .ri-header {
     padding: 2rem 0;

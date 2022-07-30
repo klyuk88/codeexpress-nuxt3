@@ -1,16 +1,16 @@
 <template>
 <div>
-  <section id="single-block-page">
+  <section id="single-block-page" v-if="storeBlog.article">
     <div class="container">
       <div class="title-block">
-        <h1 class="page-title">Разработка в 2022 году, основные направления</h1>
+        <h1 class="page-title">{{storeBlog.article.attributes.title}}</h1>
         <div class="meta">
-          <p class="meta-data">20.06.2022</p>
-          <p class="meta-data">10 минут</p>
+          <p class="meta-data">{{publishDate}}</p>
+          <p class="meta-data" v-if="storeBlog.article.attributes.read_time">На чтение {{storeBlog.article.attributes.read_time}} минут</p>
         </div>
       </div>
       <div class="cover-block">
-        <img src="@/assets/images/blog-article.jpeg" alt="" class="cover" />
+        <img :src="apiURL + storeBlog.article.attributes.cover.data.attributes.url" :alt="storeBlog.article.attributes.cover.data.attributes.alternativeText" class="cover" />
       </div>
 
       <div class="single-block-page-content">
@@ -24,9 +24,7 @@
             </div>
           </div>
         </div>
-        <div class="main-block">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sequi magni fugit porro modi in, architecto amet. Suscipit itaque nulla voluptas quidem, fuga quis cupiditate eligendi inventore pariatur quos explicabo neque modi necessitatibus ratione quae repellendus facere assumenda expedita voluptatibus cumque repellat? Nulla, eius? Possimus doloribus consectetur doloremque fuga dicta voluptatibus, obcaecati ut exercitationem. Vero sint fuga, nisi eos dicta provident doloremque excepturi ullam modi repellendus reprehenderit consectetur doloribus dolorum odio quaerat architecto quis maxime quae obcaecati. Voluptate iste illum fugiat officiis dolorum dignissimos natus architecto voluptatibus. Corporis rem totam vel inventore! Iure eos, cumque saepe corrupti repudiandae omnis minima blanditiis tempore, voluptas praesentium, pariatur aliquam sed ipsa. Exercitationem assumenda animi similique neque sapiente totam nisi ipsa ipsum dolorum nobis provident at consectetur, in expedita explicabo culpa quidem possimus, odio esse quis voluptate debitis. Fugiat consequatur excepturi consequuntur tempore. Quas commodi nisi iusto voluptatum veritatis voluptas architecto provident animi numquam, accusantium libero sed eveniet! Tempore odit cum quibusdam. Soluta est, illum voluptatum ut commodi, tempora excepturi distinctio repellat esse perspiciatis, sunt cumque. Iure consectetur quasi tempora eius, mollitia nemo quaerat saepe nesciunt eligendi doloribus rem. Nulla, vitae exercitationem velit ex voluptatem, laboriosam perspiciatis iure illo et, magni obcaecati. Magni, laudantium ipsam</p>
-        </div>
+        <div class="main-block" v-html="articleContent" />
       </div>
 
     </div>
@@ -36,6 +34,25 @@
 
 </template>
 <script setup>
+import {useRoute} from 'vue-router'
+import {apiURL} from '@/composables/useEnv.js'
+import {useBlog} from '@/stores/blog.js'
+import MarkdownIt from "markdown-it";
+import { ref, onMounted } from 'vue'
+
+const storeBlog = useBlog()
+const route = useRoute()
+const publishDate = ref('')
+const articleContent = ref('')
+
+onMounted(async () => {
+  await storeBlog.getOneArticle(route.query.id)
+  const date = new Date(storeBlog.article.attributes.publishedAt)
+  publishDate.value = date.toLocaleDateString();
+  const md = new MarkdownIt()
+  articleContent.value = md.render(storeBlog.article.attributes.content)
+
+})
 </script>
 <style lang="scss">
 #single-block-page {
@@ -55,6 +72,7 @@
       justify-content: space-between;
       .meta-data {
         opacity: 0.5;
+        // font-family: Arial, Helvetica, sans-serif;
       }
     }
   }
@@ -112,6 +130,9 @@
 
     .main-block {
       width: 100%;
+      p {
+        margin-top: 2rem;
+      }
       img {
         width: 100%;
       }

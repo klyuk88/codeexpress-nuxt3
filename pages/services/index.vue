@@ -25,12 +25,8 @@
             <!-- <FormBtn :name="'Заполнить бриф'"/> -->
           </div>
         </div>
-        <div class="service-page-items-block">
-          <ServicesItem/>
-          <ServicesItem/>
-          <ServicesItem/>
-          <ServicesItem/>
-          <ServicesItem/>
+        <div class="service-page-items-block" v-if="storeServices.services">
+          <ServicesItem v-for="(item, idx) in storeServices.services" :key="idx" :title="item.attributes.title" :subtitle="item.attributes.subtitle" :slug="item.attributes.slug" :id="item.id"/>
         </div>
       </div>
     </div>
@@ -38,6 +34,14 @@
 </template>
 <script setup>
 import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.vue";
+import {useServices} from '@/stores/services.js'
+import { ref, onMounted } from 'vue'
+const storeServices = useServices()
+onMounted(() => {
+  storeServices.getServices()
+})
+
+
 </script>
 <style lang="scss">
 #services-page {

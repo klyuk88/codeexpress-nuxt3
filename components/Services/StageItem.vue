@@ -1,16 +1,21 @@
 <template>
   <div class="stage-item">
     <h4 class="stage-item-title">
-      <span>01</span>
-      Прототип
+      <span>{{`0${number + 1}`}}</span>
+      {{title}}
     </h4>
     <p class="stage-item-about">
-      Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Щеке составитель дорогу пунктуация своих журчит, запятых оксмокс живет буквоград?
+     {{about}}
     </p>
     <div class="stage-item-line"></div>
   </div>
 </template>
-<script setup> 
+<script setup>
+const props = defineProps({
+  title: String,
+  about: String,
+  number: Number
+})
 </script>
 <style lang="scss">
 .stage-item { 

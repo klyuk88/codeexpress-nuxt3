@@ -5,17 +5,19 @@
     ref="item"
   >
     <nuxt-link
-      to="/projects/best_work"
+      :to="'/projects/' + slug + '?id=' + id"
       class="item-link"
       @mousemove="moveThumb"
       @mouseleave="resetCoordinate"
       @mouseenter="resetScale"
     ></nuxt-link>
 
-    <h2 class="title">Личный кабинет охранного предприятия</h2>
+    <h2 class="title">{{title}}</h2>
     <div class="meta">
-      <span class="data">Март 2022</span>
-      <span class="data">Сайт под ключ</span>
+      <span class="data">{{date}}</span>
+      <span class="data" v-for="(item, idx) in category" :key="idx">
+        {{item.attributes.title}}
+      </span>
     </div>
     <div to="#" class="item-btn flex center j-center">
       <svg
@@ -62,7 +64,7 @@
       }"
     >
       <img
-        src="https://images.unsplash.com/photo-1648737155328-0c0012cf2f20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        :src="cover"
         alt=""
         class="thumb"
       />
@@ -74,7 +76,15 @@
 import { useStore } from "@/stores/store.js";
 import { ref, reactive } from "vue";
 const store = useStore();
-const props = defineProps(["light"]);
+const props = defineProps({
+  light: String,
+  title: String,
+  cover: String,
+  date: String,
+  category: Array,
+  slug: String,
+  id: Number
+});
 const item = ref(null);
 const coordinates = reactive({
   x: 0,

@@ -1,54 +1,79 @@
 <template>
-<div>
-  <div id="single-project-page">
-    <div class="container">
-      <div class="title-block">
-        <h1 class="page-title">Личный кабинет охранного предприятия</h1>
-        <p class="subtitle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum,
-          eligendi eos nobis impedit veniam illo soluta quae facilis repellendus
-          corporis.
-        </p>
-      </div>
-      <div class="cover-block">
-        <img src="@/assets/images/cover_demo.png" alt="" class="cover" />
-      </div>
-      <div class="single-project-header">
-        <a href="http://" target="_blank" class="sp-link">
-          <EffectWord :title="'Перейти на сайт'" />
-        </a>
-        <div class="decor-line"></div>
-      </div>
-      <div class="single-project-content">
-        <div class="sidebar-block">
-          <div class="sidebar">
-            <h3 class="title">Услуги:</h3>
-            <ul class="services-list">
-              <li class="item">Веб дизайн</li>
-              <li class="item">Верстка</li>
-              <li class="item">Программированике</li>
-            </ul>
-            <div class="sidebar-cta">
-              <h4 class="title">Обсудим<br>ваш проект?</h4>
-              <nuxt-link to="/brif" class="sidebar-link">
-                <EffectWord :title="'Заполнить бриф'" />
-              </nuxt-link>
-              <!-- <FormBtn :name="'Заполнить бриф'"/> -->
+  <div>
+    <div id="single-project-page" v-if="projectsStore.project">
+      <div class="container">
+        <div class="title-block">
+          <h1 class="page-title">
+            {{ projectsStore.project.attributes.title }}
+          </h1>
+          <p class="subtitle">
+            {{ projectsStore.project.attributes.subtitle }}
+          </p>
+        </div>
+        <div class="cover-block">
+          <img :src="apiURL + projectsStore.project.attributes.cover.data.attributes.url" alt="" class="cover" />
+        </div>
+        <div class="single-project-header">
+          <a
+            :href="projectsStore.project.attributes.link"
+            target="_blank"
+            class="sp-link"
+          >
+            <EffectWord :title="'Перейти на сайт'" />
+          </a>
+          <div class="decor-line"></div>
+        </div>
+        <div class="single-project-content">
+          <div class="sidebar-block">
+            <div class="sidebar">
+              <h3 class="title">Услуги:</h3>
+              <ul class="services-list">
+                <li
+                  class="item"
+                  v-for="(item, idx) in projectsStore.project.attributes
+                    .services.data"
+                  :key="idx"
+                >
+                  {{ item.attributes.title }}
+                </li>
+              </ul>
+              <div class="sidebar-cta">
+                <h4 class="title">Обсудим<br />ваш проект?</h4>
+                <nuxt-link to="/brif" class="sidebar-link">
+                  <EffectWord :title="'Заполнить бриф'" />
+                </nuxt-link>
+                <!-- <FormBtn :name="'Заполнить бриф'"/> -->
+              </div>
             </div>
           </div>
-        </div>
-        <div class="main">
-          <img src="@/assets/images/abstract_2.jpg" alt="" />
+
+          <div class="main">
+            <div class="content-block" v-html="content" />
+          </div>
         </div>
       </div>
     </div>
+    <MainCTA />
   </div>
-  <MainCTA/>
-</div>
-
 </template>
-<script>
-export default {};
+
+<script setup>
+import { ref, onMounted } from "vue";
+import { useProjects } from "@/stores/projects.js";
+import { useRoute } from "vue-router";
+import { apiURL } from "@/composables/useEnv.js";
+const projectsStore = useProjects();
+const route = useRoute();
+import MarkdownIt from "markdown-it";
+
+const content = ref("");
+
+onMounted(async () => {
+  await projectsStore.getProject(route.query.id);
+  const md = new MarkdownIt()
+  content.value = md.render(projectsStore.project.attributes.content);
+  
+});
 </script>
 <style lang="scss">
 #single-project-page {
@@ -60,7 +85,7 @@ export default {};
     padding: 7rem 0;
     @media (max-width: 576px) {
       grid-template-columns: 100%;
-      padding: 3rem 0
+      padding: 3rem 0;
     }
   }
   .cover-block {
@@ -150,23 +175,26 @@ export default {};
           .title {
             font-size: 1.1rem;
             line-height: 1.2;
-        
           }
           .sidebar-link {
             display: inline-block;
             margin-top: 2rem;
           }
-
-         
         }
       }
     }
     .main {
       width: 100%;
+      .content-text {
+        margin-bottom: 2rem;
+      }
       img {
         width: 100%;
+        height: auto;
+        margin-bottom: 2rem;
       }
     }
   }
 }
 </style>
+

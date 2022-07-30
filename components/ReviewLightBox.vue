@@ -1,7 +1,7 @@
 <template>
   <div class="review-lightbox" ref="lightboxWrap">
     <div class="image-block">
-      <img src="@/assets/images/reviews/mangata.jpg" alt="" class="image">
+      <img :src="image" alt="" class="image">
     </div>
   </div>
 </template>
@@ -10,6 +10,9 @@ import { ref } from 'vue'
 import {useStore} from '@/stores/store.js'
 const store = useStore()
 const emit = defineEmits(['playSwiper'])
+const props = defineProps({
+  image: String
+})
 const lightboxWrap = ref(null)
 if(process.client) {
   document.addEventListener('click', (e) => {

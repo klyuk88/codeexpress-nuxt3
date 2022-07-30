@@ -1,14 +1,13 @@
 <template>
   <section id="service-single-page" :class="{ dark: store.darkMode }">
     <div class="container">
-      <div class="service-single-title-block">
+      <div class="service-single-title-block" v-if="storeServices.service">
         <div>
-          <h2 class="page-title">Разработка сайта под ключ</h2>
+          <h2 class="page-title">
+            {{ storeServices.service.attributes.title }}
+          </h2>
           <p class="service-single-subtitle">
-            Далеко-далеко за словесными горами в стране гласных и согласных
-            живут рыбные тексты. Вопроса встретил назад, осталось прямо власти
-            взобравшись! Дал заглавных несколько курсивных продолжил! Осталось
-            не скатился грамматики.
+            {{ storeServices.service.attributes.subtitle }}
           </p>
         </div>
         <div>
@@ -49,8 +48,13 @@
           </div>
         </div>
       </div>
-      <div class="service-single-image-block">
-        <img src="@/assets/images/abstract_1.jpg" alt="" />
+      <div class="service-single-image-block" v-if="storeServices.service">
+        <img
+          :src="
+            apiURL + storeServices.service.attributes.cover.data.attributes.url
+          "
+          alt=""
+        />
       </div>
 
       <div class="service-single-stages-block" ref="stagesElem">
@@ -61,11 +65,14 @@
               <h2 class="service-single-section-title">Этапы работ</h2>
             </div>
           </div>
-          <div class="service-single-stages-items">
-            <ServicesStageItem />
-            <ServicesStageItem />
-            <ServicesStageItem />
-            <ServicesStageItem />
+          <div class="service-single-stages-items" v-if="storeServices.service">
+            <ServicesStageItem
+              v-for="(item, idx) in storeServices.service.attributes.stages"
+              :key="idx"
+              :number="idx"
+              :title="item.title"
+              :about="item.text"
+            />
           </div>
         </div>
         <div class="service-single-projects-block">
@@ -75,30 +82,42 @@
             <NuxtLink to="/projects" class="all-projects-link">
               <EffectWord :title="'Все проекты'" />
             </NuxtLink>
-            
           </div>
           <div class="decor-line"></div>
-          <div class="projects-block">
-            <PortfolioItem/>
-            <PortfolioItem/>
-            <PortfolioItem/>
+          <div class="projects-block" v-if="storeServices.service">
+            <PortfolioItem
+              v-for="(project, index) in storeServices.service.attributes.projects.data"
+              :key="index"
+              :title="project.attributes.title"
+              :date="project.attributes.project_date"
+              :cover="apiURL + project.attributes.cover.data.attributes.url"
+              :category="project.attributes.project_categories.data"
+              :slug="project.attributes.slug"
+              :id="project.id"
+            />
           </div>
         </div>
       </div>
 
-      <MainCTA/>
-
-
+      <MainCTA />
     </div>
   </section>
 </template>
 <script setup>
 import { useStore } from "@/stores/store.js";
+import { useServices } from "@/stores/services.js";
+import { useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
+import { apiURL } from "@/composables/useEnv.js";
+
+const route = useRoute();
 const store = useStore();
+const storeServices = useServices();
 const stagesElem = ref(null);
 
 onMounted(() => {
+  storeServices.getOneService(route.query.id);
+
   const options = {
     root: null,
     rootMargin: "0px",
@@ -207,7 +226,7 @@ onMounted(() => {
     }
     .service-single-projects-block {
       > .decor-line {
-        margin-top: var(--section-top);  
+        margin-top: var(--section-top);
       }
       > .title-grid {
         display: grid;

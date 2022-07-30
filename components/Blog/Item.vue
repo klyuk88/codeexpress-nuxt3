@@ -1,22 +1,26 @@
 <template>
   <div class="blog-item">
-    <nuxt-link to="/blog/atricle" class="image-link">
+    <nuxt-link :to="`/blog/${options.slug}?id=${options.id}`" class="image-link">
       <div class="image-block">
         <img
-          src="@/assets/images/blog-article.jpeg"
-          alt=""
+          :src="apiURL + options.cover"
+          :alt="options.altText"
         />
       </div>
     </nuxt-link>
 
     <div class="title-block">
       <nuxt-link to="/blog/atricle" class="title-link"
-        ><h3 class="title">Разработка в 2022 году</h3></nuxt-link>
-      <span class="meta">10 минут</span>
+        ><h3 class="title">{{options.title}}</h3></nuxt-link>
+      <span class="meta">На чтение {{options.time}} минут</span>
     </div>
   </div>
 </template>
 <script setup>
+import {apiURL} from '@/composables/useEnv.js'
+const props = defineProps({
+  options: Object
+})
 </script>
 <style lang="scss">
 .blog-item {

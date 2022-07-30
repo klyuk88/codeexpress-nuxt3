@@ -1,9 +1,9 @@
 <template>
-<nuxt-link to="/services/development" class="services-item-link">
+<nuxt-link :to="`/services/${slug}?id=${id}`" class="services-item-link">
   <div class="service-item">
-      <h3 class="service-item-title">Разработка сайта под ключ</h3>
+      <h3 class="service-item-title">{{title}}</h3>
     <p class="service-item-about">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. At luctus proin velit etiam vel. Orci libero mauris proin viverra amet. Quisque mi arcu, feugiat justo adipiscing non neque. Fermentum consequat, morbi cras tellus dictum egestas.
+      {{subtitle}}
     </p>
     <EffectWord :title="'подробнее'"/>
     <div class="line"></div>
@@ -12,6 +12,12 @@
 
 </template>
 <script setup>
+const props = defineProps({
+  title: String,
+  subtitle: String,
+  slug: String,
+  id: Number
+})
 </script>
 <style lang="scss">
 .services-item-link {

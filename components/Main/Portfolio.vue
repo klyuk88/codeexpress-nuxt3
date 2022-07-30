@@ -12,16 +12,21 @@
           сферами бизнеса
         </h2>
         <nuxt-link to="/projects">
-        <EffectWord :title="'Все проекты'"/>
+          <EffectWord :title="'Все проекты'" />
         </nuxt-link>
-         
       </div>
       <div class="decor-line"></div>
-
-      <div class="portfolio-items">
-        <PortfolioItem />
-        <PortfolioItem />
-        <PortfolioItem />
+      <div class="portfolio-items" v-if="projectsStore.projects">
+        <PortfolioItem
+          v-for="(project, index) in projectsStore.projects"
+          :key="index"
+          :title="project.attributes.title"
+          :date="project.attributes.project_date"
+          :cover="apiURL + project.attributes.cover.data.attributes.url"
+          :category="project.attributes.project_categories.data"
+          :slug="project.attributes.slug"
+          :id="project.id"
+        />
       </div>
     </div>
   </section>
@@ -29,11 +34,19 @@
 
 <script setup>
 import { useStore } from "@/stores/store.js";
-import { ref, onMounted } from "vue";
+import { useProjects } from "@/stores/projects.js";
+import { apiURL } from "@/composables/useEnv.js";
+import { ref, onMounted, computed } from "vue";
+
 const store = useStore();
+const projectsStore = useProjects();
 const portfolioElem = ref(null);
 
+
+
 onMounted(() => {
+  projectsStore.getProjects();
+
   const options = {
     root: null,
     rootMargin: "0px",
@@ -49,7 +62,7 @@ onMounted(() => {
     });
   };
   const observerPortfolio = new IntersectionObserver(callBack, options);
-  observerPortfolio.observe(portfolioElem.value)
+  observerPortfolio.observe(portfolioElem.value);
 });
 </script>
 
@@ -67,5 +80,6 @@ onMounted(() => {
     margin-top: 3rem;
   }
 }
-
 </style>
+
+
