@@ -16,23 +16,24 @@
       </div>
 
       <div class="projects-items-block">
-        <div class="filter">
+        <div class="filter" v-if="projectsStore.projectCategories">
           <h2 class="title">Фильтр:</h2>
           <ul class="filters">
             <li>
               <nuxt-link to="/projects">Все</nuxt-link>
             </li>
-            <!-- <li @click="filterProject">Интернет-магазин</li> -->
-            <li>
-              <nuxt-link to="/projects/category/web-service">
-                Веб-сервис
+            <li v-for="(item, idx) in projectsStore.projectCategories" :key="idx">
+              <nuxt-link :to="`/projects/category/${item.attributes.slug}`">
+                {{item.attributes.title}}
               </nuxt-link>
             </li>
           </ul>
         </div>
         <div class="decor-line"></div>
 
-        <div class="items" v-if="projectsStore.projects">
+        <Spinner v-if="spinner"/>
+        
+        <div class="items" v-if="projectsStore.projects && !spinner">
           <PortfolioItem
             v-for="(project, index) in projectsStore.projects"
             :key="index"
@@ -57,28 +58,29 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const projectsStore = useProjects();
+const spinner = ref(true)
+const projectCategories = ref([])
 
-watch(
-  () => route.query.category,
-  (newCategory) => {
+onMounted(async () => {
+  
+  await projectsStore.getCategoryProjects()
+
+
+
+  if (route.params.slug) {
     projectsStore.getProjects({
-      filter: newCategory,
+      filter: route.params.slug,
     });
+     setTimeout(() => {
+      spinner.value = false
+    }, 500);
+    
+  } else {
+    projectsStore.getProjects()
+    setTimeout(() => {
+      spinner.value = false
+    }, 500);
   }
-);
-
-const filterProject = () => {
-  router.push({
-    query: {
-      category: "internet-magazin",
-    },
-  });
-};
-
-onMounted(() => {
-  projectsStore.getProjects({
-    filter: route.query.category,
-  });
 });
 </script>
 <style lang="scss" scoped>
@@ -152,6 +154,7 @@ onMounted(() => {
     }
     .items {
       margin-top: 3rem;
+      padding-bottom: 10rem;
       @media (max-width: 576px) {
         margin-top: 0;
       }
@@ -168,4 +171,5 @@ onMounted(() => {
     }
   }
 }
+
 </style>

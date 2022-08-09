@@ -1,10 +1,15 @@
 <template>
   <div class="form-textarea">
-    <textarea :name="name" id="" :placeholder="placeholder"></textarea>
+    <textarea
+    :placeholder="placeholder"
+    :value="modelValue"
+     @input="$emit('update:modelValue', $event.target.value)"
+    >
+    </textarea>
   </div>
 </template>
 <script setup>
-const props = defineProps(["name", "placeholder"]);
+const props = defineProps(["modelValue", "placeholder"]);
 </script>
 <style lang="scss">
 .form-textarea {

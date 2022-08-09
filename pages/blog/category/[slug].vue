@@ -1,3 +1,3 @@
 <template>
-  <BlogArchive/>
+<BlogArchive/>
 </template>

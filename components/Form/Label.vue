@@ -1,5 +1,5 @@
 <template>
-  <label for="" class="form-label">{{title}}</label>
+  <div class="form-label">{{title}}</div>
 </template>
 
 <script setup>

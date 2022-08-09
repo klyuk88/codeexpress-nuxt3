@@ -5,6 +5,10 @@
       type="text"
       :placeholder="placeholder"
       class="text-input"
+      :value="modelValue"
+      :name="inputName"
+      @input="$emit('update:modelValue', $event.target.value)"
+      
     />
   </div>
 </template>
@@ -13,9 +17,16 @@
 const props = defineProps({
   placeholder: {
     type: String,
-    default: 'Подскзазка'
+    default: 'Подсказка'
+  },
+  modelValue: {
+    type: [String, Number]
+  },
+  inputName: {
+    type: String
   }
 })
+const emit = defineEmits(['update:modelValue'])
 </script>
 
 <style lang="scss">

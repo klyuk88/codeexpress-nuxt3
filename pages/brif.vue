@@ -2,7 +2,7 @@
   <section id="brif">
     <div class="container">
       <div class="brif-grid">
-        <div class="col-3">
+        <div class="col">
           <div class="fixed-sidebar">
             <h1 class="page-title">
               Заполните<br />пожалуйста<br /><span>бриф</span>
@@ -12,22 +12,40 @@
             </p>
           </div>
         </div>
-        <div class="col-3">
-          <form class="brif-form">
+        <div class="col">
+          <form class="brif-form" @submit.prevent="sendBrif">
             <div class="form-block">
               <FormLabel :title="'Название продукта*'" />
               <FormTextInput
                 :placeholder="'Например продаем одежду, создаем сервис знакомств...'"
+                v-model="brifForm.product"
+                :name="'Название продукта'"
               />
             </div>
 
             <div class="form-block">
               <FormLabel :title="'Выберите тип работ*'" />
               <div class="chekbox-block">
-                <FormCheckbox :name="'Веб-сервис'" />
-                <FormCheckbox :name="'Сайт'" />
-                <FormCheckbox :name="'Интернет-магазин'" />
-                <FormCheckbox :name="'Frontend Разработка'" />
+                <FormRadio
+                  :name="'Тип проекта'"
+                  :modelValue="'Веб-сервис'"
+                  v-model="brifForm.projectType"
+                />
+                <FormRadio
+                  :name="'Тип проекта'"
+                  :modelValue="'Сайт'"
+                  v-model="brifForm.projectType"
+                />
+                <FormRadio
+                  :name="'Тип проекта'"
+                  :modelValue="'Интернет-магазин'"
+                  v-model="brifForm.projectType"
+                />
+                <FormRadio
+                  :name="'Тип проекта'"
+                  :modelValue="'Frontend Разработка'"
+                  v-model="brifForm.projectType"
+                />
               </div>
             </div>
 
@@ -35,25 +53,36 @@
               <div class="inputs-block">
                 <div class="item">
                   <FormLabel :title="'Ваше имя*'" />
-                  <FormTextInput :placeholder="'Введите имя'" />
+                  <FormTextInput
+                    :placeholder="'Введите имя'"
+                    v-model="brifForm.name"
+                  />
                 </div>
                 <div class="item">
                   <FormLabel :title="'Ваше контакт*'" />
-                  <FormTextInput :placeholder="'+7(___)___-__-__'" />
+                  <FormTextInput
+                    :placeholder="'+7(___)___-__-__'"
+                    v-model="brifForm.phone"
+                  />
                 </div>
                 <div class="item">
                   <FormLabel :title="'Описание проекта*'" />
-                  <FormTextArea
-                    :name="'Описание проекта'"
-                    :placeholder="'Опишите кратко проект'"
-                  />
+                  <client-only>
+                    <FormTextArea
+                      :placeholder="'Опишите ваш проект'"
+                      v-model="brifForm.about"
+                    />
+                  </client-only>
                 </div>
               </div>
             </div>
 
             <div class="form-block">
               <FormLabel :title="'Техническое задание'" />
-              <FormFile />
+              <FormFile
+                @newFile="getNewFile"
+                @clearFile="brifForm.file = null"
+              />
             </div>
             <div class="send-form-block">
               <FormBtn :name="'Отправить'" />
@@ -67,6 +96,37 @@
 </template>
 
 <script setup>
+import { ref, reactive } from "vue";
+import { serialize } from "object-to-formdata";
+import axios from "axios";
+
+const getNewFile = (file) => {
+  brifForm.file = file;
+};
+
+const brifForm = reactive({
+  product: null,
+  projectType: null,
+  name: null,
+  phone: null,
+  about: null,
+  file: "",
+  agree: true,
+});
+
+const sendBrif = async () => {
+  const formData = serialize(brifForm);
+  console.log(formData);
+  try {
+    const res = await axios.post("/api/send", formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 </script>
 
 <style lang="scss">

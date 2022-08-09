@@ -13,7 +13,10 @@
 </template>
 <script setup>
 import { useStore } from '@/stores/store.js';
+
 const store = useStore();
+
+
 </script>
 
 <style lang="scss">

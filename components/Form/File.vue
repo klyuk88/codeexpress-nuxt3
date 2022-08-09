@@ -1,24 +1,53 @@
 <template>
-    <label class="form-file">
-      <img src="@/assets/images/attach-icon.svg" alt="" class="icon">
-      <input type="file" name="техническое задание" id="" accept="application/pdf, application/msword">
-      <span class="label">Выбрать файл</span>
-    </label>
-    <small class="small">необязательное поле</small>
+<div class="fileInput-block">
+  <label class="form-file">
+    <client-only>
+      <img src="@/assets/images/attach-icon.svg" alt="" class="icon" />
+    </client-only>
+    <input
+      type="file"
+      name="техническое задание"
+      id=""
+      accept="application/pdf, application/msword"
+      ref="fileInput"
+      @change="fileHeandler"
+    />
+    <span class="label">Выбрать файл</span>
+  </label>
+  <p class="fileInput-name" v-if="fileName">
+    {{fileName}}
+    <span class="clearFileInput" @click="clearFileInput">X</span>
+  </p>
+</div>
+  <small class="small">необязательное поле</small>
 </template>
 <script setup>
+import { ref } from 'vue'
+const emit = defineEmits(['newFile','clearFile'])
+const fileInput = ref(null)
+const fileName = ref(null)
+const fileHeandler = () => {
+  fileName.value = fileInput.value.files[0].name;
+  emit('newFile', fileInput.value.files[0])
+}
+const clearFileInput = () => {
+  fileInput.value.value = null
+  fileName.value = null
+  emit('clearFile')
+}
+
 </script>
 <style lang="scss" scoped>
 .form-file {
   display: flex;
-  background: #E4E4E4;
+  background: #e4e4e4;
   align-items: center;
   justify-content: center;
-  border: 1px solid #D3D3D3;
+  border: 1px solid #d3d3d3;
   height: 3.5rem;
   width: 15rem;
   cursor: pointer;
-  transition: all .1s ease;
+  transition: all 0.1s ease;
   input {
     display: none;
   }
@@ -29,11 +58,10 @@
   .label {
     color: rgba(0, 0, 0, 0.2);
   }
-
 }
 .form-file:hover {
   border-color: var(--accent);
-  background: rgba($color: #ED7635, $alpha: 0.07);
+  background: rgba($color: #ed7635, $alpha: 0.07);
 }
 .small {
   color: rgba(0, 0, 0, 0.2);
@@ -41,5 +69,15 @@
   margin-top: 0.3rem;
   display: block;
 }
-  
+.fileInput-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .fileInput-name {
+    font-size: 1rem;
+  }
+  .clearFileInput {
+    cursor: pointer;
+  }
+}
 </style>

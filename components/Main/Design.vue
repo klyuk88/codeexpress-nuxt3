@@ -13,7 +13,10 @@
             Делаем продуманные интерфейсы, опираясь на
             <b>целевую аудиторию</b> продукта.
           </p>
+          <nuxt-link to="/brif">
           <FormBtn :name="'Заполнить бриф'" />
+          </nuxt-link>
+          
         </div>
       </div>
       <div id="interactive-design">
