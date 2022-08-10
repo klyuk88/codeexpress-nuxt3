@@ -85,8 +85,8 @@
               />
             </div>
             <div class="send-form-block">
-              <FormBtn :name="'Отправить'" />
-              <FormAgree />
+              <FormBtn :name="'Отправить'" :active="brifForm.agree"/>
+              <FormAgree :agree="brifForm.agree" @change="brifForm.agree = !brifForm.agree"/>
             </div>
           </form>
         </div>
@@ -99,6 +99,8 @@
 import { ref, reactive } from "vue";
 import { serialize } from "object-to-formdata";
 import axios from "axios";
+
+
 
 const getNewFile = (file) => {
   brifForm.file = file;
@@ -116,7 +118,6 @@ const brifForm = reactive({
 
 const sendBrif = async () => {
   const formData = serialize(brifForm);
-  console.log(formData);
   try {
     const res = await axios.post("/api/send", formData, {
       headers: {
@@ -124,7 +125,7 @@ const sendBrif = async () => {
       }
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 </script>

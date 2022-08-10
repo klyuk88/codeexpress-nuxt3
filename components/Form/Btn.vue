@@ -1,5 +1,5 @@
 <template>
-  <button class="btn">
+  <button class="btn" :class="{'no-active': !active}" :disabled="!active">
     <div class="title-wrap">
       <span class="title" :data-name="name">{{ name }}</span>
     </div>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-const props = defineProps(["name"]);
+const props = defineProps(["name", "active"]);
 </script>
 
 <style lang="scss">
@@ -54,5 +54,8 @@ const props = defineProps(["name"]);
 .btn .icon {
   width: 1.5rem;
   margin-left: 1rem;
+}
+.btn.no-active {
+  background: rgba($color: #000000, $alpha: 0.5);
 }
 </style>

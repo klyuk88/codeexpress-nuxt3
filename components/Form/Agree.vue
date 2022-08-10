@@ -1,6 +1,10 @@
 <template>
   <label class="form-agree">
-    <input type="checkbox" name="" />
+    <input
+      type="checkbox"
+      :checked="agree"
+      @change="changeAgree"
+    />
     <div class="checkbox">
       <svg
         width="15"
@@ -31,8 +35,12 @@
     <span class="label">Согласен(а) с обработкой персональный данных</span>
   </label>
 </template>
-<script>
-export default {};
+<script setup>
+const props = defineProps(['agree'])
+const emit = defineEmits(['change'])
+const changeAgree = () => {
+  emit('change', props.agree)
+}
 </script>
 <style lang="scss" scoped>
 .form-agree {

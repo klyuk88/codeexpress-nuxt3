@@ -78,6 +78,7 @@ const clearFileInput = () => {
   }
   .clearFileInput {
     cursor: pointer;
+    color: var(--accent)
   }
 }
 </style>
