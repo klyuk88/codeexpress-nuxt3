@@ -72,18 +72,22 @@ export default defineEventHandler(async (event) => {
       secure: true,
     });
 
+    const attachments = files.file
+      ? [
+          {
+            filename: files.file.originalFilename,
+            path: files.file.filepath,
+          },
+        ]
+      : [];
+
     const mailData = {
       from: 'no-replay@launchplus.ru',
       to: '',
       subject: 'Бриф с сайта launch',
       text: ``,
       html: htmlBody,
-      attachments: [
-        {
-          filename: files.file.originalFilename,
-          path: files.file.filepath,
-        },
-      ],
+      attachments,
     };
 
     try {
