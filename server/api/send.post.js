@@ -87,9 +87,9 @@ export default defineEventHandler(async (event) => {
     };
 
     try {
-      const result = await transporter.sendMail(mailData);
+      const info = await transporter.sendMail(mailData);
 
-      return successHandler(res, result);
+      return successHandler(res, info);
     } catch (error) {
       return errorHandler(res, error.message);
     }
