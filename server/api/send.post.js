@@ -27,14 +27,14 @@ export default defineEventHandler(async (event) => {
                 port: 465, // true for 465, false for other ports
                 host: "smtp.yandex.ru",
                 auth: {
-                    user: 'klyukovskiy',
+                    user: '',
                     pass: '',
                 },
                 secure: true,
             });
             const mailData = {
-                from: 'klyukovskiy@yandex.ru',
-                to: 'klyukovskiy@yandex.ru',
+                from: 'no-replay@launchplus.ru',
+                to: '',
                 subject: 'Бриф с сайта launch',
                 text: ``,
                 html: htmlBody,
