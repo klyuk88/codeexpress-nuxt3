@@ -8,7 +8,7 @@ const successHandler = (res, data = {}, message = 'ok', statusCode = 200) => {
 
   return {
     data: {
-      status: false,
+      status: true,
       data,
       message,
     },
