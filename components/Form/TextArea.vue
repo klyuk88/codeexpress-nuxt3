@@ -1,12 +1,13 @@
 <template>
   <div class="form-textarea">
     <textarea
-    :placeholder="placeholder"
-    :value="modelValue"
-     @input="$emit('update:modelValue', $event.target.value)"
+      :placeholder="placeholder"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     >
     </textarea>
   </div>
+  
 </template>
 <script setup>
 const props = defineProps(["modelValue", "placeholder"]);
@@ -14,6 +15,7 @@ const props = defineProps(["modelValue", "placeholder"]);
 <style lang="scss">
 .form-textarea {
   position: relative;
+
   textarea {
     width: 100%;
     height: 8rem;
@@ -36,6 +38,12 @@ const props = defineProps(["modelValue", "placeholder"]);
     font-size: 1rem;
     color: rgba($color: #000, $alpha: 0.2);
   }
+}
+.small {
+  color: rgba(0, 0, 0, 0.2);
+  font-style: 0.9rem;
+  margin-top: 0.3rem;
+  display: block;
 }
 .form-textarea:focus-within:after {
   content: "";

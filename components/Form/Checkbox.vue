@@ -6,7 +6,7 @@
     :name="name"
     :value="name"
     @change="$emit('update:modelValue', $event.target.value)" />
-    <!-- @input="checkHeandler" /> -->
+    
     <div class="check"></div>
   </label>
 </template>

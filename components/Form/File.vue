@@ -19,7 +19,7 @@
     <span class="clearFileInput" @click="clearFileInput">X</span>
   </p>
 </div>
-  <small class="small">необязательное поле</small>
+  
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -63,12 +63,7 @@ const clearFileInput = () => {
   border-color: var(--accent);
   background: rgba($color: #ed7635, $alpha: 0.07);
 }
-.small {
-  color: rgba(0, 0, 0, 0.2);
-  font-style: 0.9rem;
-  margin-top: 0.3rem;
-  display: block;
-}
+
 .fileInput-block {
   display: flex;
   align-items: center;

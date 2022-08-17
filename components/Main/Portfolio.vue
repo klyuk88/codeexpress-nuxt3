@@ -28,6 +28,9 @@
           :id="project.id"
         />
       </div>
+      <div v-else class="error-mess">
+          <h2>Ошибка загрузки данных 😞</h2>
+      </div>
     </div>
   </section>
 </template>

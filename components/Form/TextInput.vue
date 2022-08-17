@@ -2,12 +2,13 @@
   <div class="form-input flex column start">
    
     <input
-      type="text"
+      :type="type"
       :placeholder="placeholder"
       class="text-input"
       :value="modelValue"
       :name="inputName"
       @input="$emit('update:modelValue', $event.target.value)"
+      :required="required"
       
     />
   </div>
@@ -24,6 +25,14 @@ const props = defineProps({
   },
   inputName: {
     type: String
+  },
+  required: {
+    type: Boolean,
+    default: true
+  },
+  type: {
+    type: String,
+    default: 'text'
   }
 })
 const emit = defineEmits(['update:modelValue'])

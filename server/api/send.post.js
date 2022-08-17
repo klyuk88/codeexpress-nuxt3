@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const { fields, files } = await getData(req);
-
+  
     let htmlBody = `<table style="width: 100%;">`;
 
     for (const key in fields) {
@@ -66,8 +66,8 @@ export default defineEventHandler(async (event) => {
       port: 465, // true for 465, false for other ports
       host: 'smtp.yandex.ru',
       auth: {
-        user: '',
-        pass: '',
+        user: 'klyukovskiy',
+        pass: 'Dmb!02072010',
       },
       secure: true,
     });
@@ -82,8 +82,8 @@ export default defineEventHandler(async (event) => {
       : [];
 
     const mailData = {
-      from: 'no-replay@launchplus.ru',
-      to: '',
+      from: 'klyukovskiy@yandex.ru',
+      to: 'klyukovskiy@yandex.ru',
       subject: 'Бриф с сайта launch',
       text: ``,
       html: htmlBody,

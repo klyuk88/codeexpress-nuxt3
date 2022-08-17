@@ -8,7 +8,13 @@
 </template>
 
 <script setup>
-const props = defineProps(["name", "active"]);
+const props = defineProps({
+  active: {
+    type: Boolean,
+    default: true
+  },
+  name: String
+});
 </script>
 
 <style lang="scss">

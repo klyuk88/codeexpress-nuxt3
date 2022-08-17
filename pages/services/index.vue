@@ -28,6 +28,9 @@
         <div class="service-page-items-block" v-if="storeServices.services">
           <ServicesItem v-for="(item, idx) in storeServices.services" :key="idx" :title="item.attributes.title" :subtitle="item.attributes.subtitle" :slug="item.attributes.slug" :id="item.id"/>
         </div>
+        <div v-else class="error-mess">
+          <h2>Ошбика загрузки данных.😞</h2>
+        </div>
       </div>
     </div>
   </section>

@@ -103,7 +103,7 @@
         </div>
         <div>
           <NuxtLink to="/">
-            <img src="@/assets/images/logo-black.svg" alt="" class="logo" />
+            <Logo />
           </NuxtLink>
         </div>
         <div>
@@ -213,7 +213,6 @@ const showNavigation = () => {
 
 .header .logo {
   width: 7rem;
-  
 }
 
 .header .decor-line {

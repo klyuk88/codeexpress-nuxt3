@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="projects-items-block">
+      <div class="projects-items-block" v-if="projectsStore.projects">
         <div class="filter" v-if="projectsStore.projectCategories">
           <h2 class="title">Фильтр:</h2>
           <ul class="filters">
@@ -46,6 +46,9 @@
           />
         </div>
       </div>
+      <div class="error-mess" v-else>
+        <h2>Ошбика загрузки данных.😞</h2>
+      </div>
     </div>
   </section>
 </template>
@@ -65,18 +68,19 @@ onMounted(async () => {
   
   await projectsStore.getCategoryProjects()
 
-
-
   if (route.params.slug) {
     projectsStore.getProjects({
       filter: route.params.slug,
+      pageSize: 20
     });
      setTimeout(() => {
       spinner.value = false
     }, 500);
     
   } else {
-    projectsStore.getProjects()
+    projectsStore.getProjects({
+      pageSize: 20
+    })
     setTimeout(() => {
       spinner.value = false
     }, 500);

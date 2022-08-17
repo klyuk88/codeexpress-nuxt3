@@ -2,9 +2,10 @@
   <div
     class="decorative-name"
     ref="decorLogo"
-    :style="{ transform: `translateX(${logoScroll - 20}%)` }"
+    :style="{ transform: `translateX(${logoScroll - 30}%)` }"
   >
-    Launch<span>+</span>
+    <!-- Launch<span>+</span> -->
+    CodeExpress
   </div>
 </template>
 <script setup>
@@ -45,7 +46,7 @@ onMounted(() => {
   font-family: "Raleway";
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 20rem;
+  font-size: 15rem;
   color: #fff;
   margin-top: 8rem;
   @media (max-width: 576px) {

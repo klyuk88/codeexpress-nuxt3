@@ -34,7 +34,7 @@
             </ul>
           </div>
         </div>
-        <div class="articles">
+        <div class="articles" v-if="storeBlog.articles">
           <Spinner v-if="spinner" />
           <div class="articles-block" v-if="!spinner">
             <BlogItem
@@ -50,6 +50,9 @@
               }"
             />
           </div>
+        </div>
+        <div v-else class="error-mess">
+          <h2>Ошбика загрузки данных.😞</h2>
         </div>
       </div>
     </div>

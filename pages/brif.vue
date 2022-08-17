@@ -28,23 +28,33 @@
               <div class="chekbox-block">
                 <FormRadio
                   :name="'Тип проекта'"
-                  :modelValue="'Веб-сервис'"
+                  :modelValue="'Разработка под ключ'"
                   v-model="brifForm.projectType"
+                  :required="true"
                 />
                 <FormRadio
                   :name="'Тип проекта'"
-                  :modelValue="'Сайт'"
+                  :modelValue="'Frontend разработка'"
                   v-model="brifForm.projectType"
+                  :required="false"
                 />
                 <FormRadio
                   :name="'Тип проекта'"
-                  :modelValue="'Интернет-магазин'"
+                  :modelValue="'HTML верстка'"
                   v-model="brifForm.projectType"
+                  :required="false"
                 />
                 <FormRadio
                   :name="'Тип проекта'"
-                  :modelValue="'Frontend Разработка'"
+                  :modelValue="'Backend разработка'"
                   v-model="brifForm.projectType"
+                  :required="false"
+                />
+                <FormRadio
+                  :name="'Тип проекта'"
+                  :modelValue="'Другое'"
+                  v-model="brifForm.projectType"
+                  :required="false"
                 />
               </div>
             </div>
@@ -59,19 +69,21 @@
                   />
                 </div>
                 <div class="item">
-                  <FormLabel :title="'Ваше контакт*'" />
+                  <FormLabel :title="'Ваш контакт*'" />
                   <FormTextInput
-                    :placeholder="'+7(___)___-__-__'"
+                    :placeholder="'Укажите удобный способ связи с вами'"
                     v-model="brifForm.phone"
                   />
+                  <FormSmall :msg="'(Телефон/WhatsApp/Telegram)'" />
                 </div>
                 <div class="item">
-                  <FormLabel :title="'Описание проекта*'" />
+                  <FormLabel :title="'Описание проекта'" />
                   <client-only>
                     <FormTextArea
                       :placeholder="'Опишите ваш проект'"
                       v-model="brifForm.about"
                     />
+                    <FormSmall :msg="'Необязательное поле'" />
                   </client-only>
                 </div>
               </div>
@@ -83,10 +95,23 @@
                 @newFile="getNewFile"
                 @clearFile="brifForm.file = null"
               />
+              <FormSmall
+                :msg="`Размер не более ${fileSizeVal / 1024 / 1024}мб`"
+              />
+              <FormSmall
+                v-if="fileSize"
+                :msg="'Размер вложения превышает допустимое значение'"
+              />
             </div>
             <div class="send-form-block">
-              <FormBtn :name="'Отправить'" :active="brifForm.agree"/>
-              <FormAgree :agree="brifForm.agree" @change="brifForm.agree = !brifForm.agree"/>
+              <div class="btn-block">
+                <FormBtn :name="'Отправить'" :active="brifForm.agree" />
+              </div>
+
+              <FormAgree
+                :agree="brifForm.agree"
+                @change="brifForm.agree = !brifForm.agree"
+              />
             </div>
           </form>
         </div>
@@ -96,15 +121,16 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 import { serialize } from "object-to-formdata";
+import {useRouter} from 'vue-router'
+const router = useRouter()
 import axios from "axios";
-
-
 
 const getNewFile = (file) => {
   brifForm.file = file;
 };
+const fileSizeVal = ref(1024 * 1024 * 3);
 
 const brifForm = reactive({
   product: null,
@@ -112,20 +138,32 @@ const brifForm = reactive({
   name: null,
   phone: null,
   about: null,
-  file: "",
+  file: null,
   agree: true,
 });
 
+const fileSize = computed(() => {
+  if (brifForm.file && brifForm.file.size > fileSizeVal.value) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
 const sendBrif = async () => {
-  const formData = serialize(brifForm);
-  try {
-    const res = await axios.post("/api/send", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-  } catch (error) {
-    // console.log(error);
+  if (!fileSize.value) {
+    const formData = serialize(brifForm);
+    try {
+      const res = await axios.post("/api/send", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      router.push('/thanks')
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>
@@ -204,6 +242,22 @@ const sendBrif = async () => {
       display: block;
       margin-top: 3rem;
     }
+  }
+  .btn-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 576px) {
+      flex-direction: column;
+    }
+  }
+  .validate-msg {
+    color: var(--accent);
+    text-align: center;
+    font-size: 1rem;
+    padding: 1rem 0;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 }
 </style>

@@ -7,6 +7,7 @@
       :value="modelValue"
       @change="checkHeandler(event)"
       ref="radioInput"
+      :required="required"
     />
     <label class="check-block" :for="modelValue">
       <span>{{ modelValue }}</span>
@@ -16,7 +17,14 @@
 </template>
 <script setup>
 import { ref, computed } from "vue";
-const props = defineProps(["modelValue", "name"]);
+const props = defineProps({
+  modelValue: [String, Number],
+  name: String,
+  required: {
+    type: Boolean,
+    default: true
+  }
+});
 const emit = defineEmits(["update:modelValue"]);
 const radioInput = ref(null);
 const check = ref(false);
@@ -28,7 +36,8 @@ const checkHeandler = (event) => {
 .form-checkbox {
   position: relative;
   input {
-    display: none;
+    position: absolute;
+    opacity: 0;
   }
   input:checked + .check-block {
     border: 1px solid var(--accent);
