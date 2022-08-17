@@ -1,2 +1,2 @@
-export const apiURL = 'http://localhost:1337';
+export const apiURL = 'https://api.codeexpress.ru';
 

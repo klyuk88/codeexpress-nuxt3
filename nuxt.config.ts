@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     transpile: ['gsap'],
   },
   modules: [
-    ['@nuxtjs/axios', {proxyHeaders:false}],
+    // ['@nuxtjs/axios', {proxyHeaders:false}],
     '@pinia/nuxt',
   ],
   runtimeConfig: {
