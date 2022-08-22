@@ -7,7 +7,7 @@
             <span>Отзывы</span><br />о нашей<br />работе
           </h2>
         </div>
-        <div class="col-3">
+        <div class="col-3" v-if="data">
           <Swiper
             :modules="[Autoplay]"
             :slides-per-view="1"
@@ -19,8 +19,15 @@
               delay: 5000,
             }"
           >
-            <SwiperSlide v-for="(item, idx) in reviewsStore.reviews" :key="idx">
-              <ReviewItem @blockSwiper="blockSwiper" :company="item.attributes.company" :review="item.attributes.text" :logo="item.attributes.logo.data.attributes.url" :scan="item.attributes.scan.data.attributes.url" @setImage="setImage"/>
+            <SwiperSlide v-for="(item, idx) in data.data" :key="idx">
+              <ReviewItem
+                @blockSwiper="blockSwiper"
+                :company="item.attributes.company"
+                :review="item.attributes.text"
+                :logo="item.attributes.logo.data.attributes.url"
+                :scan="item.attributes.scan.data.attributes.url"
+                @setImage="setImage"
+              />
             </SwiperSlide>
           </Swiper>
         </div>
@@ -28,7 +35,11 @@
       <div class="decor-line"></div>
     </div>
   </section>
-  <ReviewLightBox v-if="store.lightBox" @playSwiper="playSwiper" :image="lightBoxImage"/>
+  <ReviewLightBox
+    v-if="store.lightBox"
+    @playSwiper="playSwiper"
+    :image="lightBoxImage"
+  />
 </template>
 
 <script setup>
@@ -36,14 +47,13 @@ import { ref, reactive, onMounted } from "vue";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { useStore } from "@/stores/store.js";
-import { useReviews } from "@/stores/reviews.js";
 import "swiper/css";
 import "swiper/css/autoplay";
+import qs from "qs";
 
 const store = useStore();
-const reviewsStore = useReviews();
 const slider = ref(null);
-const lightBoxImage = ref(null)
+const lightBoxImage = ref(null);
 const onSwiper = (swiper) => {
   slider.value = swiper;
 };
@@ -57,12 +67,20 @@ const playSwiper = () => {
 };
 
 const setImage = (scan) => {
-  lightBoxImage.value = scan
-}
+  lightBoxImage.value = scan;
+};
 
-onMounted(() => {
-  reviewsStore.getReviews();
+const runtimeConfig = useRuntimeConfig();
+const query = qs.stringify({
+  populate: "*",
 });
+
+const { data } = await useFetch(
+  `${runtimeConfig.public.apiURL}/api/reviews?${query}`
+);
+
+
+
 </script>
 
 <style lang="scss">

@@ -1,58 +1,74 @@
 <template>
-<div>
-  <section id="single-block-page" v-if="storeBlog.article">
-    <div class="container">
-      <div class="title-block">
-        <h1 class="page-title">{{storeBlog.article.attributes.title}}</h1>
-        <div class="meta">
-          <p class="meta-data">{{publishDate}}</p>
-          <p class="meta-data" v-if="storeBlog.article.attributes.read_time">На чтение {{storeBlog.article.attributes.read_time}} минут</p>
-        </div>
-      </div>
-      <div class="cover-block">
-        <img :src="apiURL + storeBlog.article.attributes.cover.data.attributes.url" :alt="storeBlog.article.attributes.cover.data.attributes.alternativeText" class="cover" />
-      </div>
-
-      <div class="single-block-page-content">
-        <div class="sidebar-block">
-          <div class="sidebar">
-            <div class="sidebar-cta">
-              <h4 class="title">Обсудим<br />ваш проект?</h4>
-              <nuxt-link to="/brif" class="phone-wrap">
-                <EffectWord :title="'Заполнить бриф'" />
-              </nuxt-link>
-            </div>
+  <div>
+      <Head v-if="seoData">
+      <Title>{{seoData.metaTitle}}</Title>
+      <Meta name="description" :content="seoData.metaDescription" />
+      <Meta name="keywords" :content="seoData.keywords" />
+    </Head>
+     
+    <section id="single-block-page" v-if="article">
+      <div class="container">
+        <div class="title-block">
+          <h1 class="page-title">{{ article.data.attributes.title }}</h1>
+          <div class="meta">
+            <p class="meta-data">{{ publishDate }}</p>
+            <p class="meta-data" v-if="article.data.attributes.read_time">
+              На чтение {{ article.data.attributes.read_time }} минут
+            </p>
           </div>
         </div>
-        <div class="main-block" v-html="articleContent" />
+        <div class="cover-block">
+          <img
+            :src="
+              $config.public.apiURL + article.data.attributes.cover.data.attributes.url
+            "
+            :alt="
+              article.data.attributes.cover.data.attributes.alternativeText
+            "
+            class="cover"
+          />
+        </div>
+
+        <div class="single-block-page-content">
+          <div class="sidebar-block">
+            <div class="sidebar">
+              <div class="sidebar-cta">
+                <h4 class="title">Обсудим<br />ваш проект?</h4>
+                <nuxt-link to="/brif" class="phone-wrap">
+                  <EffectWord :title="'Заполнить бриф'" />
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="main-block" v-html="articleContent" />
+        </div>
       </div>
-
-    </div>
-  </section>
-  <MainCTA/>
-</div>
-
+    </section>
+    <MainCTA />
+  </div>
 </template>
 <script setup>
-import {useRoute} from 'vue-router'
-import {apiURL} from '@/composables/useEnv.js'
-import {useBlog} from '@/stores/blog.js'
+import { useRoute } from "vue-router";
 import MarkdownIt from "markdown-it";
-import { ref, onMounted } from 'vue'
+import { ref } from "vue";
+import qs from 'qs'
 
-const storeBlog = useBlog()
-const route = useRoute()
-const publishDate = ref('')
-const articleContent = ref('')
+const route = useRoute();
+const publishDate = ref("");
+const articleContent = ref("");
+const seoData = ref(null)
 
-onMounted(async () => {
-  await storeBlog.getOneArticle(route.query.id)
-  const date = new Date(storeBlog.article.attributes.publishedAt)
-  publishDate.value = date.toLocaleDateString();
-  const md = new MarkdownIt()
-  articleContent.value = md.render(storeBlog.article.attributes.content)
-
+const runtimeConfig = useRuntimeConfig()
+const query = qs.stringify({
+  populate: '*'
 })
+const { data:article } = await useFetch(`${runtimeConfig.public.apiURL}/api/articles/${route.query.id}?${query}`)
+seoData.value = article.value.data.attributes.seo
+const date = new Date(article.value.data.attributes.publishedAt);
+publishDate.value = date.toLocaleDateString();
+const md = new MarkdownIt();
+articleContent.value = md.render(article.value.data.attributes.content);
+
 </script>
 <style lang="scss">
 #single-block-page {
@@ -65,7 +81,7 @@ onMounted(async () => {
     @media (max-width: 576px) {
       grid-template-columns: 100%;
       padding: 3rem 0;
-    }    
+    }
     .meta {
       display: flex;
       align-items: center;
@@ -110,7 +126,7 @@ onMounted(async () => {
         position: sticky;
         position: -webkit-sticky;
         will-change: transform;
-        top: 5rem;
+        top: 6rem;
         bottom: auto;
         .sidebar-cta {
           .title {

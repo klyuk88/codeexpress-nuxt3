@@ -1,14 +1,15 @@
 import type { RouterConfig } from '@nuxt/schema'
-
-// https://router.vuejs.org/api/#routeroptions
-export default <RouterConfig> {
+export default <RouterConfig>{
   scrollBehavior(to, from, savedPosition) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve({ left: 0, top: 0 })
-        }, 500)
-      })
-    
-
+    // const regexpCategory = /projects\/category/i;
+    // const regexpProject = /projects/i;
+    // let toCategory = regexpCategory.test(to.path)
+    // let fromCategoryToProjects = regexpCategory.test(from.path)
+    // let toProjects = regexpProject.test(to.path)
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ left: 0, top: 0 })
+      }, 300)
+    })
   },
 }

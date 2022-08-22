@@ -3,20 +3,19 @@
   <div class="review-item">
     <div class="test"></div>
     <div class="ri-header flex start">
-      <img :src="apiURL + logo" alt="" class="ri-logo"/>
+      <img :src="$config.public.apiURL + logo" alt="" class="ri-logo"/>
       <h4 class="ri-title">{{company}}</h4>
     </div>
     <div class="ri-text">
       {{review}}
     </div>
-     <EffectWord :title="'Смотреть скан'" @click.prevent="openLightbox"/>
+     <EffectWord :title="'Смотреть скан'" @click.prevent="openLightbox" class="scan-btn"/>
   </div>
 
 </template>
 
 <script setup>
 import {useStore} from '@/stores/store.js'
-import {apiURL} from '@/composables/useEnv.js'
 const store = useStore()
 const emit = defineEmits(['blockSwiper','setImage'])
 const props = defineProps({
@@ -26,16 +25,20 @@ const props = defineProps({
   scan: String
 
 })
+const runtimeConfig = useRuntimeConfig()
 const openLightbox = () => {
     store.lightBox = true
     emit('blockSwiper')
-    emit('setImage', apiURL + props.scan)
+    emit('setImage',runtimeConfig.public.apiURL + props.scan)
 }
 </script>
 
 <style lang="scss">
 
 .review-item {
+  .scan-btn {
+    cursor: pointer;
+  }
   .ri-header {
     padding: 2rem 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5)

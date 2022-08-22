@@ -3,7 +3,7 @@
     <nuxt-link :to="`/blog/${options.slug}?id=${options.id}`" class="image-link">
       <div class="image-block">
         <img
-          :src="apiURL + options.cover"
+          :src="$config.public.apiURL + options.cover"
           :alt="options.altText"
         />
       </div>
@@ -17,7 +17,6 @@
   </div>
 </template>
 <script setup>
-import {apiURL} from '@/composables/useEnv.js'
 const props = defineProps({
   options: Object
 })

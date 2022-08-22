@@ -1,4 +1,10 @@
 <template>
+<div>
+    <Head v-if="seoData">
+    <Title>{{ seoData.metaTitle }}</Title>
+    <Meta name="description" :content="seoData.metaDescription" />
+    <Meta name="keywords" :content="seoData.keywords" />
+  </Head>
   <section id="brif">
     <div class="container">
       <div class="brif-grid">
@@ -118,13 +124,16 @@
       </div>
     </div>
   </section>
+
+</div>
+
 </template>
 
 <script setup>
 import { ref, reactive, computed } from "vue";
 import { serialize } from "object-to-formdata";
-import {useRouter} from 'vue-router'
-const router = useRouter()
+import { useRouter } from "vue-router";
+const router = useRouter();
 import axios from "axios";
 
 const getNewFile = (file) => {
@@ -150,6 +159,32 @@ const fileSize = computed(() => {
   }
 });
 
+import qs from "qs";
+const runtimeConfig = useRuntimeConfig();
+const query = qs.stringify({
+  populate: ["seo"],
+});
+const { data: brifPage } = await useFetch(
+  `${runtimeConfig.public.apiURL}/api/brif-page?${query}`
+);
+const seoData = ref(brifPage.value.data.attributes.seo);
+
+// const { data, pending, error } = await useFetch(
+//   `/api/send`,
+//   {
+//     method: "post",
+//     body: JSON.stringify({
+//       title: "foo",
+//       body: "bar",
+//       userId: 1,
+//     }),
+//     headers: {
+//       "Content-type": "application/json; charset=UTF-8",
+//     },
+//   }
+// );
+// console.log(data, error);
+
 const sendBrif = async () => {
   if (!fileSize.value) {
     const formData = serialize(brifForm);
@@ -159,8 +194,7 @@ const sendBrif = async () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      router.push('/thanks')
-      
+      router.push("/thanks");
     } catch (error) {
       console.log(error);
     }

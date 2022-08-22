@@ -6,7 +6,7 @@
       <div class="bg-line"></div>
     </div>
     <div class="nav-header-block">
-      <img src="@/assets/images/logo-white.svg" alt="logo" class="nav-logo" />
+      <Logo :type="'white'"/>
       <EffectWord :title="'Закрыть'" class="close-nav" @click="closeNav" />
       <div class="line"></div>
     </div>

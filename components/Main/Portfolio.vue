@@ -16,20 +16,21 @@
         </nuxt-link>
       </div>
       <div class="decor-line"></div>
-      <div class="portfolio-items" v-if="projectsStore.projects">
+      <div class="portfolio-items" v-if="data">
+        
         <PortfolioItem
-          v-for="(project, index) in projectsStore.projects"
+          v-for="(project, index) in data.data"
           :key="index"
           :title="project.attributes.title"
           :date="project.attributes.project_date"
-          :cover="apiURL + project.attributes.cover.data.attributes.url"
+          :cover="$config.public.apiURL + project.attributes.cover.data.attributes.url"
           :category="project.attributes.project_categories.data"
           :slug="project.attributes.slug"
           :id="project.id"
         />
       </div>
       <div v-else class="error-mess">
-          <h2>Ошибка загрузки данных 😞</h2>
+        <h2>Ошибка загрузки данных 😞</h2>
       </div>
     </div>
   </section>
@@ -37,19 +38,26 @@
 
 <script setup>
 import { useStore } from "@/stores/store.js";
-import { useProjects } from "@/stores/projects.js";
-import { apiURL } from "@/composables/useEnv.js";
 import { ref, onMounted, computed } from "vue";
+import qs from "qs";
 
 const store = useStore();
-const projectsStore = useProjects();
 const portfolioElem = ref(null);
+const runtimeConfig = useRuntimeConfig();
 
+const query = qs.stringify({
+  pagination: {
+    page: 1,
+    pageSize: 3,
+  },
+  populate: "*",
+});
 
+const { data } = await useFetch(
+  `${runtimeConfig.public.apiURL}/api/projects?${query}`
+);
 
 onMounted(() => {
-  projectsStore.getProjects();
-
   const options = {
     root: null,
     rootMargin: "0px",

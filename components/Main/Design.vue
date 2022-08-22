@@ -23,9 +23,6 @@
         <client-only>
           <Compare />
         </client-only>
-        <!-- <client-only>
-          <ImageCompare :before="before" :after="after"></ImageCompare> 
-        </client-only> -->
       </div>
     </div>
   </section>
@@ -34,8 +31,6 @@
 import ImageCompare from "@/components/Main/ImageCompare.vue";
 
 import { ref, onMounted } from "vue";
-// const before = ref("demo-screen.webp");
-// const after = ref("proto-demoX4.webp");
 </script>
 
 <style lang="scss">

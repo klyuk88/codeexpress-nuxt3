@@ -1,21 +1,33 @@
 <template>
   <div>
-    <div id="single-project-page" v-if="projectsStore.project">
+    <Head v-if="project.data.attributes.seo">
+      <Title>{{ project.data.attributes.seo.metaTitle }}</Title>
+      <Meta name="description" :content="project.data.attributes.seo.metaDescription" />
+      <Meta name="keywords" :content="project.data.attributes.seo.keywords" />
+    </Head>
+    <div id="single-project-page" v-if="project">
       <div class="container">
         <div class="title-block">
           <h1 class="page-title">
-            {{ projectsStore.project.attributes.title }}
+            {{ project.data.attributes.title }}
           </h1>
           <p class="subtitle">
-            {{ projectsStore.project.attributes.subtitle }}
+            {{ project.data.attributes.subtitle }}
           </p>
         </div>
         <div class="cover-block">
-          <img :src="apiURL + projectsStore.project.attributes.cover.data.attributes.url" alt="" class="cover" />
+          <img
+            :src="
+              $config.public.apiURL +
+              project.data.attributes.cover.data.attributes.url
+            "
+            alt=""
+            class="cover"
+          />
         </div>
         <div class="single-project-header">
           <a
-            :href="projectsStore.project.attributes.link"
+            :href="project.data.attributes.link"
             target="_blank"
             class="sp-link"
           >
@@ -30,8 +42,7 @@
               <ul class="services-list">
                 <li
                   class="item"
-                  v-for="(item, idx) in projectsStore.project.attributes
-                    .services.data"
+                  v-for="(item, idx) in project.data.attributes.services.data"
                   :key="idx"
                 >
                   {{ item.attributes.title }}
@@ -58,22 +69,46 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useProjects } from "@/stores/projects.js";
+import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { apiURL } from "@/composables/useEnv.js";
-const projectsStore = useProjects();
+import qs from "qs";
 const route = useRoute();
 import MarkdownIt from "markdown-it";
 
 const content = ref("");
-
-onMounted(async () => {
-  await projectsStore.getProject(route.query.id);
-  const md = new MarkdownIt()
-  content.value = md.render(projectsStore.project.attributes.content);
-  
+const runtimeConfig = useRuntimeConfig();
+const query = qs.stringify({
+  populate: {
+    content: {
+      populate: {
+        image: {
+          fields: ["url"],
+        },
+        text: {
+          fields: "*",
+        },
+      },
+    },
+    services: {
+      fields: ["title"],
+    },
+    project_categories: {
+      fields: "*",
+    },
+    cover: {
+      fields: ["url"],
+    },
+    seo: {
+      fields: "*",
+    },
+  },
 });
+const { data: project } = await useFetch(
+  `${runtimeConfig.public.apiURL}/api/projects/${route.query.id}?${query}`
+);
+const md = new MarkdownIt();
+content.value = md.render(project.value.data.attributes.content);
+
 </script>
 <style lang="scss">
 #single-project-page {
@@ -113,7 +148,7 @@ onMounted(async () => {
     will-change: transform;
     position: sticky;
     position: -webkit-sticky;
-    top: 0;
+    top: 0.5rem;
     z-index: 200;
     background: var(--light);
     @media (max-width: 576px) {

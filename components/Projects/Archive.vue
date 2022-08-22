@@ -1,4 +1,5 @@
 <template>
+<div>
   <section id="projects">
     <div class="container">
       <div class="projects-grid">
@@ -15,77 +16,96 @@
         </div>
       </div>
 
-      <div class="projects-items-block" v-if="projectsStore.projects">
-        <div class="filter" v-if="projectsStore.projectCategories">
+      <div class="projects-items-block" v-if="noEmptyCategories">
+        <div class="filter">
           <h2 class="title">Фильтр:</h2>
           <ul class="filters">
             <li>
               <nuxt-link to="/projects">Все</nuxt-link>
             </li>
-            <li v-for="(item, idx) in projectsStore.projectCategories" :key="idx">
+            <li v-for="(item, idx) in noEmptyCategories" :key="idx">
               <nuxt-link :to="`/projects/category/${item.attributes.slug}`">
-                {{item.attributes.title}}
+                {{ item.attributes.title }}
               </nuxt-link>
             </li>
           </ul>
         </div>
         <div class="decor-line"></div>
-
-        <Spinner v-if="spinner"/>
-        
-        <div class="items" v-if="projectsStore.projects && !spinner">
+        <Spinner v-if="spinner" />
+        <div class="items" v-if="projects && !spinner">
           <PortfolioItem
-            v-for="(project, index) in projectsStore.projects"
+            v-for="(project, index) in projects.data"
             :key="index"
             :title="project.attributes.title"
             :date="project.attributes.project_date"
-            :cover="apiURL + project.attributes.cover.data.attributes.url"
+            :cover="
+              $config.public.apiURL +
+              project.attributes.cover.data.attributes.url
+            "
             :category="project.attributes.project_categories.data"
             :slug="project.attributes.slug"
             :id="project.id"
           />
         </div>
       </div>
-      <div class="error-mess" v-else>
-        <h2>Ошбика загрузки данных.😞</h2>
-      </div>
     </div>
   </section>
+
+</div>
 </template>
 <script setup>
-import { useProjects } from "@/stores/projects.js";
-import { apiURL } from "@/composables/useEnv.js";
-import { ref, onMounted, watch } from "vue";
+import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import qs from "qs";
 
 const router = useRouter();
 const route = useRoute();
-const projectsStore = useProjects();
-const spinner = ref(true)
-const projectCategories = ref([])
+const spinner = ref(true);
+const runtimeConfig = useRuntimeConfig();
 
-onMounted(async () => {
-  
-  await projectsStore.getCategoryProjects()
-
-  if (route.params.slug) {
-    projectsStore.getProjects({
-      filter: route.params.slug,
-      pageSize: 20
-    });
-     setTimeout(() => {
-      spinner.value = false
-    }, 500);
-    
-  } else {
-    projectsStore.getProjects({
-      pageSize: 20
-    })
-    setTimeout(() => {
-      spinner.value = false
-    }, 500);
-  }
+const filter = computed(() => {
+  return {
+    project_categories: {
+      slug: {
+        $eq: route.params.slug,
+      },
+    },
+  };
 });
+const query = qs.stringify({
+  pagination: {
+    page: 1,
+    pageSize: 25,
+  },
+  populate: "*",
+  filters: filter.value,
+});
+
+const { data: projects, pending } = await useLazyFetch(
+  `${runtimeConfig.public.apiURL}/api/projects?${query}`
+);
+
+setTimeout(() => {
+  spinner.value = false
+}, 1000);
+
+const { data: categories } = await useFetch(
+  `${runtimeConfig.public.apiURL}/api/project-categories?${qs.stringify({
+    populate: ["projects"],
+  })}`
+);
+const noEmptyCategories = computed(() => {
+  return (
+    categories.value.data.filter(
+      (elem) => elem.attributes.projects.data.length > 0
+    ) || null
+  );
+});
+const currentCategory = computed(() => {
+  return categories.value.data.find(elem => elem.attributes.slug === route.params.slug) || null
+})
+
+
 </script>
 <style lang="scss" scoped>
 #projects {
@@ -175,5 +195,4 @@ onMounted(async () => {
     }
   }
 }
-
 </style>
