@@ -5,7 +5,7 @@
       <Meta name="description" :content="service.data.attributes.seo.metaDescription" />
       <Meta name="keywords" :content="service.data.attributes.seo.keywords" />
     </Head>
-    <section id="service-single-page" :class="{ dark: store.darkMode }">
+    <section id="service-single-page" :class="{ dark: darkMode }">
       <div class="container">
         <div class="service-single-title-block">
           <div>
@@ -115,10 +115,12 @@
   </div>
 </template>
 <script setup>
-import { useStore } from "@/stores/store.js";
 import { useRoute } from "vue-router";
+import { useDarkMode } from '@/composables/states.ts';
 import { ref } from "vue";
 import qs from "qs";
+
+const darkMode = useDarkMode();
 const stagesElem = ref(null)
 const route = useRoute();
 const runtimeConfig = useRuntimeConfig();
@@ -137,7 +139,6 @@ const query = qs.stringify({
 const { data: service } = await useFetch(
   `${runtimeConfig.public.apiURL}/api/services/${route.query.id}?${query}`
 );
-const store = useStore();
 
 onMounted(() => {
   const options = {
@@ -149,9 +150,9 @@ onMounted(() => {
   const callBack = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        store.darkMode = true;
+        darkMode.value = true;
       } else {
-        store.darkMode = false;
+        darkMode.value = false;
       }
     });
   };

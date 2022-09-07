@@ -182,19 +182,19 @@
     </div>
     <ProjectsNav :current-project-id="project.id" />
     <MainCTA />
-    <ReviewLightBox v-if="store.lightBox" :image="reviewURL" />
+    <ReviewLightBox v-if="lightBox" :image="reviewURL" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useStore } from "@/stores/store.js";
 import qs from "qs";
 const route = useRoute();
 import MarkdownIt from "markdown-it";
+import { useLightBox } from "@/composables/states.ts"
 
-const store = useStore();
+const lightBox = useLightBox();
 const content = ref("");
 const reviewURL = ref("");
 const runtimeConfig = useRuntimeConfig();
@@ -259,7 +259,7 @@ if (project.attributes.content) {
 }
 
 const openLightbox = (image) => {
-  store.lightBox = true;
+  lightBox.value = true;
   reviewURL.value = runtimeConfig.public.apiURL + image;
 };
 </script>

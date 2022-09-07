@@ -1,5 +1,5 @@
 <template>
-  <header class="header" :class="{ dark: store.darkMode }">
+  <header class="header" :class="{ dark: darkMode }">
     <div class="container">
       <div class="header-grid">
         <div>
@@ -119,10 +119,11 @@
   </header>
 </template>
 <script setup>
-import { useStore } from "@/stores/store.js";
-const store = useStore();
+import { useNav, useDarkMode } from '@/composables/states.ts';
+const darkMode = useDarkMode();
+const showNav = useNav()
 const showNavigation = () => {
-  store.showNav = true;
+  showNav.value = true
 };
 </script>
 <style lang="scss">

@@ -1,7 +1,7 @@
 <template>
   <div
     class="portfolio-item flex center column j-center"
-    :class="{ light: !store.darkMode }"
+    :class="{ light: !darkMode }"
     ref="item"
   >
     <nuxt-link
@@ -73,9 +73,9 @@
 </template>
 
 <script setup>
-import { useStore } from "@/stores/store.js";
+import { useDarkMode } from "@/composables/states.ts"
 import { ref, reactive } from "vue";
-const store = useStore();
+const darkMode = useDarkMode();
 const props = defineProps({
   light: String,
   title: String,

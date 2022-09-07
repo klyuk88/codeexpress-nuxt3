@@ -56,16 +56,6 @@
       </div>
     </div>
   </section>
-    <ImgComparisonSlider>
-    <!-- eslint-disable -->
-    <!-- <img slot="first" style="width: 100%" src="@/assets/images/cart_design_1.webp" />
-    <img slot="second" style="width: 100%" src="@/assets/images/cart_proto.webp" /> -->
-    <div slot="handle" class="handle">
-      <img src="@/assets/images/handle-left.svg" alt="">
-      <img src="@/assets/images/handle-right.svg" alt="">
-    </div>
-    <!-- eslint-enable -->
-  </ImgComparisonSlider>
 </template>
 
 <script setup>

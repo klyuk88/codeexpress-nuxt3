@@ -1,5 +1,5 @@
 <template>
-  <div class="main-page" :class="{ dark: store.darkMode }">
+  <div class="main-page" :class="{ dark: darkMode }">
     <Head v-if="data.data.attributes.seo">
       <Title>{{ data.data.attributes.seo.metaTitle }}</Title>
       <Meta
@@ -20,13 +20,14 @@
   </div>
 </template>
 <script setup>
-import { useStore } from "@/stores/store.js";
+import { useDarkMode } from "@/composables/states.ts"
 import { ref, onMounted } from "vue";
 import qs from "qs";
+
+const darkMode = useDarkMode();
 const videoElem = ref(null);
 const runtimeConfig = useRuntimeConfig();
 
-const store = useStore();
 const query = qs.stringify({
   populate: "*",
 });

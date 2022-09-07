@@ -15,8 +15,9 @@
 </template>
 
 <script setup>
-import {useStore} from '@/stores/store.js'
-const store = useStore()
+import { useLightBox } from "@/composables/states.ts"
+
+const lightBox = useLightBox();
 const emit = defineEmits(['blockSwiper','setImage'])
 const props = defineProps({
   company: String,
@@ -27,7 +28,7 @@ const props = defineProps({
 })
 const runtimeConfig = useRuntimeConfig()
 const openLightbox = () => {
-    store.lightBox = true
+    lightBox.value = true
     emit('blockSwiper')
     emit('setImage',runtimeConfig.public.apiURL + props.scan)
 }

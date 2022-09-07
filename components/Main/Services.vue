@@ -1,7 +1,7 @@
 <template>
   <section
     class="services"
-    :class="{ 'before-dark-mode': !store.darkMode }"
+    :class="{ 'before-dark-mode': !darkMode }"
     ref="servicesNode"
   >
     <div class="container">
@@ -63,13 +63,13 @@
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { useStore } from "@/stores/store.js";
+import { useDarkMode } from '@/composables/states.ts';
 import ScreenOne from "@/assets/images/screen_1.png";
 import ScreenTwo from "@/assets/images/screen_2.png";
 import ScreenThree from "@/assets/images/screen_3.png";
 
-const store = useStore();
 const index = ref(null);
+const darkMode = useDarkMode();
 const serviceItems = ref([
   {
     title: "Разработка сайта",
@@ -127,9 +127,9 @@ onMounted(() => {
   const callBack = (entries, observer) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        store.darkMode = true;
+        darkMode.value = true;
       } else {
-        store.darkMode = false;
+        darkMode.value = false;
       }
     });
   };

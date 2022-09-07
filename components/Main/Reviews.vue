@@ -36,7 +36,7 @@
     </div>
   </section>
   <ReviewLightBox
-    v-if="store.lightBox"
+    v-if="lightBox"
     @playSwiper="playSwiper"
     :image="lightBoxImage"
   />
@@ -46,12 +46,12 @@
 import { ref, reactive, onMounted } from "vue";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { useStore } from "@/stores/store.js";
+import { useLightBox } from "@/composables/states.ts"
 import "swiper/css";
 import "swiper/css/autoplay";
 import qs from "qs";
 
-const store = useStore();
+const lightBox = useLightBox();
 const slider = ref(null);
 const lightBoxImage = ref(null);
 const onSwiper = (swiper) => {

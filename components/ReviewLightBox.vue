@@ -7,8 +7,9 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import {useStore} from '@/stores/store.js'
-const store = useStore()
+import { useLightBox } from "@/composables/states.ts"
+
+const lightBox = useLightBox();
 const emit = defineEmits(['playSwiper'])
 const props = defineProps({
   image: String
@@ -17,7 +18,7 @@ const lightboxWrap = ref(null)
 if(process.client) {
   document.addEventListener('click', (e) => {
     if(e.target === lightboxWrap.value) {
-      store.lightBox = false
+      lightBox.value = false
       emit('playSwiper')
     }
   })

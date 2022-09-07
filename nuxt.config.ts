@@ -23,9 +23,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['gsap'],
   },
-  modules: [
-    '@pinia/nuxt',
-  ],
+  modules: [],
   runtimeConfig: {
     public: {
       apiURL: process.env.NUXT_API_URL
@@ -34,7 +32,5 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'node-server'
   }
-
-
 
 })

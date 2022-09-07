@@ -1,5 +1,5 @@
 <template>
-  <div class="navigation-wrap" :class="{ active: store.showNav }">
+  <div class="navigation-wrap" :class="{ active: showNav }">
     <div class="linesBackground">
       <div class="bg-line"></div>
       <div class="bg-line"></div>
@@ -51,22 +51,22 @@
   </div>
 </template>
 <script setup>
-import { useStore } from "@/stores/store.js";
 import { useRouter } from "vue-router";
+import { useNav } from '@/composables/states.ts'
 
+const showNav = useNav()
 const router = useRouter();
 
 router.afterEach((to, from) => {
-  if (store.showNav) {
+  if (showNav.value) {
     setTimeout(() => {
       closeNav();
     }, 300);
   }
 });
 
-const store = useStore();
 const closeNav = () => {
-  store.showNav = false;
+  showNav.value = false;
 };
 </script>
 <style lang="scss">
