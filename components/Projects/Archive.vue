@@ -15,9 +15,8 @@
           </p>
         </div>
       </div>
-
-      <div class="projects-items-block" v-if="noEmptyCategories">
-        <div class="filter">
+      <div class="projects-items-block">
+        <div class="filter" v-if="categories.data.length">
           <h2 class="title">Фильтр:</h2>
           <ul class="filters">
             <li>
@@ -38,10 +37,7 @@
             :key="index"
             :title="project.attributes.title"
             :date="project.attributes.project_date"
-            :cover="
-              $config.public.apiURL +
-              project.attributes.cover.data.attributes.url
-            "
+            :thumb="$config.public.apiURL + project.attributes.thumb.data.attributes.url"
             :category="project.attributes.project_categories.data"
             :slug="project.attributes.slug"
             :id="project.id"

@@ -34,7 +34,7 @@ if(process.client) {
     align-items: center;
     justify-content: center;
     background: rgba($color: #000000, $alpha: 0.1);
-    z-index: 199;
+    z-index: 201;
     backdrop-filter: blur(20px);
     .image-block {
       text-align: center;

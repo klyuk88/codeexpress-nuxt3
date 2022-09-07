@@ -18,7 +18,6 @@
           <nuxt-link to="/brif">
             <div class="cta-brif-demo-wrap">
             <video src="@/assets/video/brif.mp4" autoplay muted loop playsinline preload="metatada" class="brif-demo-content"></video>
-            <!-- <img src="@/assets/images/cta-demo.jpg" alt="" class="brif-demo-content"> -->
           </div>
           </nuxt-link>
          

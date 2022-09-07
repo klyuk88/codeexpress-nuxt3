@@ -59,6 +59,11 @@ a {
 }
 
 
+::selection {
+    background: var(--accent); /* Цвет фона */
+    color: #fff; /* Цвет текста */
+   }
+
 
 html {
     font-size: 1vw;
@@ -309,5 +314,11 @@ h6 {
 
 
 .error-mess {
-    padding: 5rem 0;
+    padding-bottom: 5rem;
+    font-size: 1rem;
+    @media (max-width: 576px) {
+        font-size: 0.8rem;
+        padding: 3rem 0;
+        padding-top: 0;
+    }
 }

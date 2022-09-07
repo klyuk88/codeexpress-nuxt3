@@ -1,8 +1,11 @@
 <template>
   <div class="main-page" :class="{ dark: store.darkMode }">
     <Head v-if="data.data.attributes.seo">
-      <Title>{{data.data.attributes.seo.metaTitle}}</Title>
-      <Meta name="description" :content="data.data.attributes.seo.metaDescription" />
+      <Title>{{ data.data.attributes.seo.metaTitle }}</Title>
+      <Meta
+        name="description"
+        :content="data.data.attributes.seo.metaDescription"
+      />
       <Meta name="keywords" :content="data.data.attributes.seo.keywords" />
     </Head>
     <MainTop />
@@ -18,16 +21,18 @@
 </template>
 <script setup>
 import { useStore } from "@/stores/store.js";
-import qs from 'qs'
-
-const runtimeConfig = useRuntimeConfig()
+import { ref, onMounted } from "vue";
+import qs from "qs";
+const videoElem = ref(null);
+const runtimeConfig = useRuntimeConfig();
 
 const store = useStore();
 const query = qs.stringify({
-  populate: '*',
-})
-const { data } = await useFetch(`${runtimeConfig.public.apiURL}/api/main-page?${query}`)
-
+  populate: "*",
+});
+const { data } = await useFetch(
+  `${runtimeConfig.public.apiURL}/api/main-page?${query}`
+);
 </script>
 
 <style lang="scss">

@@ -159,7 +159,7 @@ const showNavigation = () => {
       color: #000;
     }
     .link-wrap {
-      @media screen and(max-width: 576px) {
+      @media screen and (max-width: 576px) {
         display: none;
       }
     }

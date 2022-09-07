@@ -3,7 +3,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="col-3 flex column j-between">
-          <div class="row">
+          <div class="row contacts-row">
             <div class="col-2">
               <Logo :type="'white'"/>
             </div>
@@ -61,6 +61,11 @@
     gap: 20px;
     @media (max-width: 576px) {
       grid-template-columns: 100%;
+    }
+    .contacts-row {
+      @media (max-width: 576px) {
+        flex-direction: column;
+      }
     }
   }
   .foo-contacts {

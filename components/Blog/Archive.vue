@@ -6,7 +6,6 @@
         <h2 class="page-title">Мысли,<br /><span>польза</span>, Инсайты</h2>
         <h1 class="big-title">Статьи</h1>
       </div>
-
       <marquee-text :repeat="5" :duration="60">
         <div class="marqee">
           • Java script • vue js • node js • nuxt js • webdesign •
@@ -14,8 +13,7 @@
           Design
         </div>
       </marquee-text>
-
-      <div class="blog-content-block">
+      <div class="blog-content-block" v-if="articles.data.length">
         <div class="sidebar-block">
           <div class="sidebar" v-if="noEmptyCategories">
             <h2 class="title">Фильтр:</h2>
@@ -35,7 +33,7 @@
             </ul>
           </div>
         </div>
-        <div class="articles" v-if="articles">
+        <div class="articles">
           <Spinner v-if="spinner" />
           <div class="articles-block" v-if="!spinner">
             <BlogItem
@@ -52,19 +50,29 @@
             />
           </div>
         </div>
-        <div v-else class="error-mess">
-          <h2>Ошбика загрузки данных.😞</h2>
-        </div>
+      </div>
+      <div v-else class="error-mess">
+        <h2>Приносим извинения, раздел находится в стадии наполнения 🙂</h2>
       </div>
     </div>
   </section>
+    <ImgComparisonSlider>
+    <!-- eslint-disable -->
+    <!-- <img slot="first" style="width: 100%" src="@/assets/images/cart_design_1.webp" />
+    <img slot="second" style="width: 100%" src="@/assets/images/cart_proto.webp" /> -->
+    <div slot="handle" class="handle">
+      <img src="@/assets/images/handle-left.svg" alt="">
+      <img src="@/assets/images/handle-right.svg" alt="">
+    </div>
+    <!-- eslint-enable -->
+  </ImgComparisonSlider>
 </template>
+
 <script setup>
 import MarqueeText from "vue-marquee-text-component/src/components/MarqueeText.vue";
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import { useRoute } from "vue-router";
 import qs from "qs";
-
 const route = useRoute();
 const spinner = ref(true);
 
@@ -114,6 +122,13 @@ const { data: articles } = await useFetch(
 <style lang="scss">
 #blog {
   padding-top: var(--section-bottom);
+  .error-mess {
+    padding-top: 5rem;
+    text-align: center;
+  }
+  .error-image {
+    width: 20rem;
+  }
   .big-title {
     position: absolute;
     font-size: 25rem;

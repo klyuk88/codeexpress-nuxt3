@@ -5,7 +5,7 @@
     ref="item"
   >
     <nuxt-link
-      :to="'/projects/' + slug + '?id=' + id"
+      :to="'/projects/' + slug"
       class="item-link"
       @mousemove="moveThumb"
       @mouseleave="resetCoordinate"
@@ -64,7 +64,7 @@
       }"
     >
       <img
-        :src="cover"
+        :src="thumb"
         alt=""
         class="thumb"
       />
@@ -80,6 +80,7 @@ const props = defineProps({
   light: String,
   title: String,
   cover: String,
+  thumb: String,
   date: String,
   category: Array,
   slug: String,
@@ -167,7 +168,7 @@ const resetScale = () => {
   .thumb-block {
     position: absolute;
     width: 37rem;
-    height: 20rem;
+    aspect-ratio: 16/9;
     z-index: 0;
     opacity: 0;
     transition: transform 0.3s linear, opacity 0.5s ease;
@@ -176,7 +177,6 @@ const resetScale = () => {
     @media (max-width: 567px) {
       opacity: 1;
       width: 80%;
-      height: 13rem;
       position: relative;
       margin-top: 1rem;
     }

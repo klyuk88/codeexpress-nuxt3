@@ -37,7 +37,7 @@
               <!-- <FormBtn :name="'Заполнить бриф'"/> -->
             </div>
           </div>
-          <div class="service-page-items-block" v-if="services">
+          <div class="service-page-items-block" v-if="services.data.length">
             <ServicesItem
               v-for="(item, idx) in services.data"
               :key="idx"
@@ -48,7 +48,7 @@
             />
           </div>
           <div v-else class="error-mess">
-            <h2>Ошбика загрузки данных.😞</h2>
+            <h2>Приносим извинения, раздел находится в стадии наполнения 🙂</h2>
           </div>
         </div>
       </div>
@@ -66,6 +66,7 @@ const query = qs.stringify({
 const { data: services } = await useFetch(
   `${runtimeConfig.public.apiURL}/api/services?${query}`
 );
+
 const { data: servicesPage } = await useFetch(
   `${runtimeConfig.public.apiURL}/api/services-page?${qs.stringify({
     populate: ["seo"],
@@ -124,13 +125,14 @@ const { data: servicesPage } = await useFetch(
     }
   }
   .service-page-sidebar-block {
+    padding-bottom: 3rem;
     @media (max-width: 576px) {
       display: none;
     }
     .sidebar-cta {
       position: sticky;
       position: -webkit-sticky;
-      top: 5rem;
+      top: 6rem;
       will-change: transform;
       .title {
         font-size: 1.1rem;

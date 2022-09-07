@@ -23,10 +23,9 @@
           :key="index"
           :title="project.attributes.title"
           :date="project.attributes.project_date"
-          :cover="$config.public.apiURL + project.attributes.cover.data.attributes.url"
+          :thumb="$config.public.apiURL + project.attributes.thumb.data.attributes.url"
           :category="project.attributes.project_categories.data"
           :slug="project.attributes.slug"
-          :id="project.id"
         />
       </div>
       <div v-else class="error-mess">

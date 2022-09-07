@@ -73,23 +73,23 @@ const index = ref(null);
 const serviceItems = ref([
   {
     title: "Разработка сайта",
-    body: `To be quite frank, the example of the major decisions, that lie behind the base configuration becomes a key factor of The Scale of Up-To-Date Challenge (Santo Berg in The Book of the Bilateral Act)`,
+    body: `Быстрые и SEO оптимизированные сайты любой сложности. От идеи до публикации в сети. Интегрируем с удобной CMS.`,
   },
   {
     title: "Разработка веб-сервиса",
-    body: `To be quite frank, the example of the major decisions, that lie behind the base configuration becomes a key factor of The Scale of Up-To-Date Challenge (Santo Berg in The Book of the Bilateral Act)`,
+    body: `Высоконагруженные веб-сервисы под индивидуальные бизнес требования. Frontend и Backend разработка, мобильная адаптация, сопровождение.`,
   },
   {
     title: "Разработка интернет-магазина",
-    body: `To be quite frank, the example of the major decisions, that lie behind the base configuration becomes a key factor of The Scale of Up-To-Date Challenge (Santo Berg in The Book of the Bilateral Act)`,
+    body: `Современные интернет-магазины с моментальной загрузкой и всем необходимым для старта онлайн торговли.`,
   },
   {
     title: "Frontend разработка",
-    body: `To be quite frank, the example of the major decisions, that lie behind the base configuration becomes a key factor of The Scale of Up-To-Date Challenge (Santo Berg in The Book of the Bilateral Act)`,
+    body: `Frontend разработка по предоставленным макетам.`,
   },
   {
     title: "SEO оптимизация",
-    body: `To be quite frank, the example of the major decisions, that lie behind the base configuration becomes a key factor of The Scale of Up-To-Date Challenge (Santo Berg in The Book of the Bilateral Act)`,
+    body: `Выведем проект в топ выдачи Яндекс и Google.`,
   },
 ]);
 const servicesNode = ref(null);
