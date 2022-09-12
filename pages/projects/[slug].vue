@@ -44,7 +44,7 @@
         </div>
         <div class="single-project-header">
           <a :href="project.attributes.link" target="_blank" class="sp-link">
-            <EffectWord :title="'Перейти на сайт'" />
+            <EffectWord :title="'Ссылка на проект'" />
           </a>
           <div class="decor-line"></div>
         </div>

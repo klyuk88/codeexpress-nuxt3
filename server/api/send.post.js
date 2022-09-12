@@ -66,8 +66,8 @@ export default defineEventHandler(async (event) => {
       port: 465, // true for 465, false for other ports
       host: 'smtp.yandex.ru',
       auth: {
-        user: 'klyukovskiy',
-        pass: 'Dmb!02072010',
+        user: '',
+        pass: '',
       },
       secure: true,
     });
