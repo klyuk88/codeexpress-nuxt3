@@ -53,7 +53,7 @@ const openLightbox = () => {
     font-size: 1.5rem;
     font-family: 'Raleway';
     font-weight: 700;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     width: 30%;
     line-height: 1.3;
   }

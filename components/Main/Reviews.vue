@@ -7,7 +7,7 @@
             <span>Отзывы</span><br />о нашей<br />работе
           </h2>
         </div>
-        <div class="col-3" v-if="data">
+        <div class="col-3" v-if="data.data.length">
           <Swiper
             :modules="[Autoplay]"
             :slides-per-view="1"
@@ -46,7 +46,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { useLightBox } from "@/composables/states.ts"
+import { useLightBox } from "@/composables/states.ts";
 import "swiper/css";
 import "swiper/css/autoplay";
 import qs from "qs";
@@ -78,9 +78,6 @@ const query = qs.stringify({
 const { data } = await useFetch(
   `${runtimeConfig.public.apiURL}/api/reviews?${query}`
 );
-
-
-
 </script>
 
 <style lang="scss">

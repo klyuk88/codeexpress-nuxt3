@@ -34,6 +34,7 @@ const query = qs.stringify({
 const { data } = await useFetch(
   `${runtimeConfig.public.apiURL}/api/main-page?${query}`
 );
+
 </script>
 
 <style lang="scss">

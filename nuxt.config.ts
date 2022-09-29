@@ -4,13 +4,13 @@ import { defineNuxtConfig } from 'nuxt'
 export default defineNuxtConfig({
   app: {
     head: {
-      title: '',
-      meta: [
-        {
-          name: 'description',
-          content: 'CodeExpress - разаботка сайтов и приложений'
-        }
-      ],
+      // title: '',
+      // meta: [
+      //   {
+      //     name: 'description',
+      //     content: 'CodeExpress - разаботка сайтов и приложений'
+      //   }
+      // ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' }
       ]
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   modules: [],
   runtimeConfig: {
     public: {
-      apiURL: process.env.NUXT_API_URL
+      apiURL: 'https://api.codeexpress.ru'
    }
   },
   nitro: {
