@@ -19,6 +19,9 @@ const props = defineProps({
     font-size: 1.2rem;
     color: #fff;
     font-weight: 600;
+    @media screen and (max-width: 576px) {
+      font-size: 1rem;
+    }
   }
 }
 .logo-block.white {

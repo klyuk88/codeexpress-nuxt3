@@ -3,7 +3,7 @@
     <div class="container">
       <div class="projects-grid">
         <div>
-          <nuxt-link :to="`/projects/${prevProject.attributes.slug}`" class="preview-link" v-if="prevProject">
+          <a :href="`/projects/${prevProject.attributes.slug}`" class="preview-link" v-if="prevProject">
             <EffectWord :title="'Предыдущий проект'"/>
             <div class="preview-block">
               <img
@@ -11,10 +11,10 @@
                 alt="Предыдущая работа"
               />
             </div>
-          </nuxt-link>
+          </a>
         </div>
         <div>
-          <nuxt-link class="preview-link" :to="`/projects/${nextProject.attributes.slug}`" v-if="nextProject">
+          <a class="preview-link" :href="`/projects/${nextProject.attributes.slug}`" v-if="nextProject">
             <EffectWord :title="'Следующий проект'" />
             <div class="preview-block">
               <img
@@ -22,7 +22,7 @@
                 alt="Следующая работа"
               />
             </div>
-          </nuxt-link>
+          </a>
         </div>
       </div>
     </div>

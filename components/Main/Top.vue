@@ -238,7 +238,8 @@ onUnmounted(() => {
   text-transform: uppercase;
   line-height: 1.2;
   @media screen and (max-width: 576px) {
-    font-size: 1.9rem;
+    font-size: 2rem;
+    margin-top: 3rem;
   }
 }
 .main-screen > .decor-gallary-wrap {
